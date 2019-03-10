@@ -12,13 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Logger;
 
 @WebServlet("/createGoods")
-public class CreateGoods extends HttpServlet {
+public class CreateGoodsServlet extends HttpServlet {
 
     //private static final Logger LOG = LogManager.getLogger(UtilServlet.class);
 
@@ -31,29 +27,22 @@ public class CreateGoods extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-Goods goods = new Goods();
-        Date createdAt;
+        Goods goods = new Goods();
+
         String goodsName = req.getParameter("goodsName");
         String price = req.getParameter("price");
-        String createdAtString = req.getParameter("createdAt");
         String color = req.getParameter("color");
         String size = req.getParameter("size");
         String available =req.getParameter("available");
         String categoryId = req.getParameter("categoryId");
         goods.setName(goodsName);
         goods.setPrice(Long.parseLong(price));
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        try {
-//            createdAt = simpleDateFormat.parse(createdAtString);
-//        } catch (ParseException e) {
 //
-//            createdAt = null;
-//        }
         goods.setColor(color);
         goods.setSize(Long.parseLong(size));
         goods.setAvailable(Long.parseLong(available));
         goods.setCategory(categoryId);
-      //  goods.setCreatedAt(createdAt);
+
 
         try {
             GoodsService.getInstance().createGoods(goods);

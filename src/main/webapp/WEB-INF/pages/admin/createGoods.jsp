@@ -3,7 +3,7 @@
 
 <html>
 <head>
-    <title>Создать новую позицию товара</title>
+    <title>Create Goods</title>
 </head>
 <body>
 
@@ -31,13 +31,6 @@
                 <input type="text" name="price" value="111">
             </td>
             <td align="right"> Данное поле не может быть меньше 0</td>
-        </tr>
-        <tr>
-            <td align="right"> Введите дату изготовления :</td>
-            <td>
-                <input type="text" name="createdAt" value="2011.01.01">
-            </td>
-            <td align="right"> Формат даты - yyyy.MM.dd</td>
         </tr>
         <tr>
             <td align="right"> Введите цвет :</td>

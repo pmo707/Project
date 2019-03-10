@@ -23,20 +23,42 @@
                 <th>Цвет</th>
                 <th>Размер</th>
                 <th>Цена</th>
+                <th>Карегория</th>
                 <th>В корзину</th>
             </tr>
             <c:forEach var="good" items="${sessionScope.goodsList}">
                 <tr>
-                    <td>${good.getName()} </td>
+                    <td>${good.name} </td>
 
-                    <td>${good.getColor()}</td>
+                    <td>${good.color}</td>
 
-                    <td> ${good.getSize()}</td>
+                    <td> ${good.size}</td>
 
-                    <td>${good.getPrice()}</td>
-                    <td><a href="../add-to-basket?productId=${good.getId()}">
-                        Добавить <br> в корзину
-                    </a></td>
+                    <td>${good.price}</td>
+
+                    <td>${good.category}</td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${sessionScope.role=='admin'}">
+                                <a href="editGoods?id=${good.id}">
+                                    Edit
+                                </a>
+                                <a href="deleteGoods?id=${good.id}">
+                                    Delete
+                                </a>
+                            </c:when>
+
+                            <c:when test="${sessionScope.role=='user'}">
+                                <a href="../add-to-basket?id=${good.id}">
+                                    Добавить <br> в корзину(doesnt work)
+                                </a>
+                            </c:when>
+
+                            <c:when test="${sessionScope.role=='blocked user'}">
+                                <a>Baned</a>
+                            </c:when>
+                        </c:choose>
+                    </td>
                 </tr>
 
             </c:forEach>
