@@ -16,7 +16,7 @@ public class GoodsDAO {
     private static final String SQL_CREATE_GOODS = "INSERT INTO goods VALUES (default, ?, ?, CURRENT_TIME,?, ?, ?, ?)";
     private static final String SQL_EDIT_GOODS = "UPDATE goods SET name= ?, price =?," +
             "createdAt=CURRENT_TIME,color =?, size =?,available = ?, category_id=? WHERE id = ?";
-    private static final String SQL_FIND_GOODS_BY_ID = "SELECT * FROM goods WHERE id=?";
+//    private static final String SQL_FIND_GOODS_BY_ID = "SELECT * FROM goods WHERE id=?";
     private static GoodsDAO instance;
 
     public static synchronized GoodsDAO getInstance() {

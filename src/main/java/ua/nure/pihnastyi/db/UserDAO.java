@@ -28,7 +28,7 @@ public class UserDAO {
     }
 
 
-    public User findUser(Connection connection, String login, String password) throws SQLException, DBException {
+    public User findUser(Connection connection, String login, String password) {
         User user = null;
         Connection con = connection;
         PreparedStatement pstmt = null;
@@ -42,6 +42,8 @@ public class UserDAO {
             if (rs.next()) {
                 user = extractUser(rs);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
             DBManager.close(rs);
             DBManager.close(pstmt);
@@ -50,11 +52,36 @@ public class UserDAO {
         return user;
     }
 
+
+    public void editUserRoleByLogin(Connection con, String login, int role) {
+        Connection connection = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        int k = 1;
+        connection = con;
+        try {
+            pstmt = connection.prepareStatement(DBConstants.SQL_EDIT_USER_ROLE,
+                    Statement.RETURN_GENERATED_KEYS);
+
+            pstmt.setInt(k++, role);
+            pstmt.setString(k++, login);
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBManager.close(rs);
+            DBManager.close(pstmt);
+        }
+
+    }
+
     private static User extractUser(ResultSet rs) throws SQLException {
         User user = new User();
         user.setId(rs.getInt(DBConstants.USER_ID));
         user.setLogin(rs.getString(DBConstants.USER_LOGIN));
-        user.setPassword(rs.getString(DBConstants.USER_PASSWORD));
+        //user.setPassword(rs.getString(DBConstants.USER_PASSWORD));
         user.setRole(rs.getString(DBConstants.ROLE));
         return user;
     }

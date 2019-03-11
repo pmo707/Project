@@ -51,7 +51,6 @@ public class LoginServlet extends HttpServlet {
         address = Paths.LIST_GOODS;
 
 
-        System.out.println(user.getRole());
         resp.sendRedirect(getServletContext().getContextPath() + address);
 
 

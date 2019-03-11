@@ -1,10 +1,9 @@
-package ua.nure.pihnastyi.controller;
+package ua.nure.pihnastyi.controller.goods;
 
 import ua.nure.pihnastyi.db.entity.Goods;
 import ua.nure.pihnastyi.db.entity.User;
 import ua.nure.pihnastyi.db.exeption.DBException;
 import ua.nure.pihnastyi.service.GoodsService;
-import ua.nure.pihnastyi.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,6 +28,5 @@ public class ListAllGoodsServlet extends HttpServlet {
 
         req.getRequestDispatcher("/WEB-INF/pages/listAllGoods.jsp").forward(req, resp);
 
-//resp.sendRedirect("1.jsp");
     }
 }

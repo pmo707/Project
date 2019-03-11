@@ -1,4 +1,4 @@
-package ua.nure.dudka.hospital.controller;
+package ua.nure.pihnastyi.controller;
 
 import org.apache.log4j.Logger;
 
@@ -28,7 +28,6 @@ public class LogOutServlet extends HttpServlet {
         if (session != null) {
             session.invalidate();
         }
-        System.out.println(getServletContext().getContextPath());
         resp.sendRedirect(getServletContext().getContextPath() + "/login");
     }
 }

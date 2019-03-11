@@ -6,18 +6,32 @@ public class DBConstants {
     public static final String USER_PASSWORD = "password";
 
     public static final String SQL_FIND_ALL_USERS = "SELECT * FROM user u" +
-            " INNER JOIN role r ON u.role_id = r.id";
+            " INNER JOIN roles r ON u.role_id = r.id";
 
     public static final String SQL_FIND_ALL_GOODS = "SELECT * FROM goods g INNER JOIN category c ON g.category_id = c.id";
     public static final String SQL_FIND_GOODS_BY_ID = SQL_FIND_ALL_GOODS + " WHERE g.id=?";
 
 
     public static final String SQL_FIND_CATEGORY_BY_NAME = "SELECT * FROM category WHERE name_category=?";
+    public static final String SQL_FIND_CATEGORY_BY_ID = "SELECT * FROM category WHERE id=?";
 
     public static final String SQL_DELETE_GOODS_BY_ID = "DELETE FROM goods WHERE id=?";
 
 
-    public static final String SQL_FIND_USER_BY_LOGIN = SQL_FIND_ALL_USERS + " WHERE u.login=?";
+    public static final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM user u INNER JOIN roles r ON u.role_id = r.id WHERE u.login=?";
+
+    public static final String SQL_EDIT_USER_ROLE = "UPDATE roles\n" +
+            "INNER JOIN user ON user.role_id = roles.id\n" +
+            "SET user.role_id = ? \n" +
+            "WHERE user.login = ?;";
+
+    public static final String SQL_FIND_ROLE_BY_NAME = "SELECT * FROM roles WHERE name=?";
+
+
+
+
+
+
     public static final String SQL_FIND_USER_BY_LOGIN_AND_PASSWORD =
             SQL_FIND_ALL_USERS + " WHERE u.login=? && u.password=?";
     public static final String SQL_INSERT_USER = "INSERT INTO user VALUES (DEFAULT, ?, ?, ?, ?)";
@@ -53,5 +67,7 @@ public class DBConstants {
     public static final String CATEGORY_NAME = "name_category";
 
 
+    public static final String ROLE_ID = "id";
+    public static final String ROLE_NAME = "name";
 
 }

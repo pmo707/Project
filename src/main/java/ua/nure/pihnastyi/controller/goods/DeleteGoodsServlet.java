@@ -1,5 +1,6 @@
-package ua.nure.pihnastyi.controller;
+package ua.nure.pihnastyi.controller.goods;
 
+import ua.nure.pihnastyi.controller.Paths;
 import ua.nure.pihnastyi.db.entity.Goods;
 import ua.nure.pihnastyi.service.GoodsService;
 

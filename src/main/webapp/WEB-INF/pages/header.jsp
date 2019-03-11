@@ -23,6 +23,7 @@
             <c:when test="${sessionScope.role=='admin'}">
                 <a href="${contextPath}/listAllGoods" class="active">Home page</a>
                 <a href="${contextPath}/createGoods" class="active">Create goods</a>
+                <a href="${contextPath}/setUserRoleByLogin" class="active">Ban / unban users</a>
 
             </c:when>
             <c:when test="${sessionScope.role=='user'}">
@@ -37,11 +38,9 @@
 
             </c:when>
         </c:choose>
-
-
     </div>
 
 </div>
-
+<hr>
 </body>
 </html>

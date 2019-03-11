@@ -21,7 +21,7 @@
         <tr>
             <td align="right"> Введите категорию :</td>
             <td>
-                <input type="text" name="categoryId" value="1">
+                <input type="text" name="categoryName" value="car">
             </td>
         </tr>
 
