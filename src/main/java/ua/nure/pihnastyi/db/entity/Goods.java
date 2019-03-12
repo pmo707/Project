@@ -67,4 +67,17 @@ public class Goods extends Module {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    @Override
+    public String toString() {
+        return "Goods{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", createdAt=" + createdAt +
+                ", color='" + color + '\'' +
+                ", size=" + size +
+                ", available=" + available +
+                ", category='" + category + '\'' +
+                '}';
+    }
 }

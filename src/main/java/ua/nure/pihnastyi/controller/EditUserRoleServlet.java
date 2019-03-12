@@ -14,7 +14,7 @@ import java.io.IOException;
 public class EditUserRoleServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/WEB-INF/pages/user/setUserRoleByLogin.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/WEB-INF/pages/admin/setUserRoleByLogin.jsp").forward(req, resp);
     }
 
     @Override

@@ -22,8 +22,8 @@
                 <th>Название</th>
                 <th>Цвет</th>
                 <th>Размер</th>
-                <th>Цена</th>
                 <th>Карегория</th>
+                <th>Цена</th>
                 <th>В корзину</th>
             </tr>
             <c:forEach var="good" items="${sessionScope.goodsList}">
@@ -34,9 +34,9 @@
 
                     <td> ${good.size}</td>
 
-                    <td>${good.price}</td>
-
                     <td>${good.category}</td>
+
+                    <td>${good.price}</td>
                     <td>
                         <c:choose>
                             <c:when test="${sessionScope.role=='admin'}">
@@ -49,8 +49,8 @@
                             </c:when>
 
                             <c:when test="${sessionScope.role=='user'}">
-                                <a href="../add-to-basket?id=${good.id}">
-                                    Добавить <br> в корзину(doesnt work)
+                                <a href="addToCart?id=${good.id}">
+                                    Добавить <br> в корзину
                                 </a>
                             </c:when>
 

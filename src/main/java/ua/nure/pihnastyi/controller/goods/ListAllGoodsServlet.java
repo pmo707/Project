@@ -26,7 +26,7 @@ public class ListAllGoodsServlet extends HttpServlet {
         }
         session.setAttribute("goodsList", goodsList);
 
+        //req.getRequestDispatcher("/WEB-INF/pages/listAllGoods.jsp").forward(req, resp);
         req.getRequestDispatcher("/WEB-INF/pages/listAllGoods.jsp").forward(req, resp);
-
     }
 }

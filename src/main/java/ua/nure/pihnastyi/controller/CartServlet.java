@@ -19,18 +19,11 @@ import java.util.List;
 public class CartServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        List<Cart> cartList = null;
-//        HttpSession session = req.getSession();
-//        try {
-//            cartListList =
-//        } catch (DBException ex) {
-//            ex.printStackTrace();
-//        }
-//        session.setAttribute("goodsList", goodsList);
+
 
         req.getRequestDispatcher("/WEB-INF/pages/user/cart.jsp").forward(req, resp);
 
-//resp.sendRedirect("1.jsp");
+
     }
 }
 

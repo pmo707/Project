@@ -21,13 +21,14 @@
     <div class="centered">
         <c:choose>
             <c:when test="${sessionScope.role=='admin'}">
-                <a href="${contextPath}/listAllGoods" class="active">Home page</a>
-                <a href="${contextPath}/createGoods" class="active">Create goods</a>
-                <a href="${contextPath}/setUserRoleByLogin" class="active">Ban / unban users</a>
+                <a href="${contextPath}/listAllGoods" class="active">Home page|</a>
+                <a href="${contextPath}/createGoods" class="active">Create goods|</a>
+                <a href="${contextPath}/setUserRoleByLogin" class="active">Ban / unban users|</a>
 
             </c:when>
             <c:when test="${sessionScope.role=='user'}">
                 <a href="${contextPath}/listAllGoods" class="homePage">Home page</a>
+                <a href="${contextPath}/listAllGoods" class="homePage">Personal area</a>
                 <form style="margin: 0; padding: 0; float: right;" action="${contextPath}/cart">
                     <button id="cartButton" type="submit">Cart</button>
                 </form>
@@ -35,6 +36,7 @@
 
             <c:when test="${sessionScope.role=='blocked user'}">
                 <a href="${contextPath}/listAllGoods" class="homePage">Home page</a>
+                <a href="${contextPath}/listAllGoods" class="homePage">Personal area</a>
 
             </c:when>
         </c:choose>

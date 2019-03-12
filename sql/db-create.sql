@@ -17,7 +17,7 @@ CREATE TABLE statuses
 
 CREATE TABLE category
 (
-  id   INT PRIMARY KEY auto_increment,
+  id            INT PRIMARY KEY auto_increment,
   name_category VARCHAR(45) UNIQUE NOT NULL
 );
 CREATE TABLE user
@@ -49,16 +49,15 @@ CREATE TABLE orders
   id        INT      NOT NULL PRIMARY KEY auto_increment,
   user_id   INT      NOT NULL,
   status_id INT      NOT NULL,
-  createdAt DATETIME NOT NULL,
+  goods_id INT       NOT NULL,
   FOREIGN KEY (user_id) REFERENCES user (id),
   FOREIGN KEY (status_id) REFERENCES statuses (id)
 );
 
 CREATE TABLE orders_goods
 (
-  goods_id INT NOT NULL,
   order_id INT NOT NULL,
-  amount   INT NOT NULL,
+  goods_id INT NOT NULL,
   FOREIGN KEY (goods_id) REFERENCES goods (id),
   FOREIGN KEY (order_id) REFERENCES orders (id)
 );
@@ -96,9 +95,9 @@ VALUES (3, "airplane");
 INSERT INTO user
 VALUES (default, "admin", "admin", 1);
 INSERT INTO user
-VALUES (default, 1, 1, 2);
+VALUES (default, "user", "user", 2);
 INSERT INTO user
-VALUES (default, "2", "2", 3);
+VALUES (default, "buser", "buser", 3);
 INSERT INTO user
 VALUES (default, "obama", "obamapass", 2);
 
@@ -116,24 +115,24 @@ VALUES (default, "Nissan", 1300.0, CURRENT_TIME, "black", 11, 12, 1);
 -- ---------------------
 -- INTO table orders
 INSERT INTO orders
-VALUES (default, 1, 2, CURRENT_TIME);
+VALUES (default, 1, 2, 1);
 INSERT INTO orders
-VALUES (default, 2, 2, CURRENT_TIME);
+VALUES (default, 2, 2, 2);
 INSERT INTO orders
-VALUES (default, 3, 1, CURRENT_TIME);
+VALUES (default, 3, 1, 1);
 INSERT INTO orders
-VALUES (default, 4, 1, CURRENT_TIME);
+VALUES (default, 4, 1, 1);
 
 -- ---------------------
 -- INTO table orders_goods
 INSERT INTO orders_goods
-VALUES (1, 1, 44);
+VALUES (1, 1);
 INSERT INTO orders_goods
-VALUES (1, 2, 12);
+VALUES (1, 2);
 INSERT INTO orders_goods
-VALUES (1, 3, 1);
+VALUES (1, 3);
 INSERT INTO orders_goods
-VALUES (1, 4, 3);
+VALUES (1, 4);
 
 
 

@@ -13,29 +13,14 @@
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
-<div class="center" id="center">
-    <form action="pages/cart1" method="post">
-        <input type="hidden" name="id" value="${subject.id}">
-        <span class="label">Subject name</span>
-        <input type="text" name="subject_name" class="inputText" pattern="[a-zA-Z]{2-15}" title="only word, length from 2 to 15" value="${subject.subjectName}" required>
 
-        <span class="label">Teach login</span>
-        <select name="teach_login" class="select">
-            <c:forEach var="value" items="${teachers}">
-                <option value="${value.login}"
-                        <c:if test="${value.login == subject.lecturer.login}">selected</c:if>>${value.login}</option>
-            </c:forEach>
-        </select>
-        <span class="label">Semester number</span>
-        <select name="semester" class="select">
-            <c:forEach var="value" items="${semesters}">
-                <option value="${value.semesterNumber}"
-                        <c:if test="${value.semesterNumber == subject.semester.semesterNumber}">selected</c:if>>${value.semesterNumber}</option>
-            </c:forEach>
-        </select>
 
-        <input type="submit" class="okayButton" value="Okay">
-    </form>
-</div>
+
+<c:forEach items="${sessionScope.cartList}" var="entry">
+    Key = ${entry.key}, value = ${entry.value.name}<br>
+
+</c:forEach>
+<form action="ДОБАВИТЬ В ТАБЛИЦУ ЗАКАЗЫ">
+<input type="button" value="Оплатить">
 </body>
 </html>
