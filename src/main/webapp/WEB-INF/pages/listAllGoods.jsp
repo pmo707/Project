@@ -26,7 +26,7 @@
                 <th>Цена</th>
                 <th>В корзину</th>
             </tr>
-            <c:forEach var="good" items="${sessionScope.goodsList}">
+            <c:forEach var="good" items="${applicationScope.goodsList}">
                 <tr>
                     <td>${good.name} </td>
 

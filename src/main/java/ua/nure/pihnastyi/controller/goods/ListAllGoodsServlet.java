@@ -24,7 +24,7 @@ public class ListAllGoodsServlet extends HttpServlet {
         } catch (DBException ex) {
             ex.printStackTrace();
         }
-        session.setAttribute("goodsList", goodsList);
+        req.getServletContext().setAttribute("goodsList", goodsList);
 
         //req.getRequestDispatcher("/WEB-INF/pages/listAllGoods.jsp").forward(req, resp);
         req.getRequestDispatcher("/WEB-INF/pages/listAllGoods.jsp").forward(req, resp);

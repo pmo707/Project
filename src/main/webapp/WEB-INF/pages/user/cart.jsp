@@ -20,7 +20,8 @@
     Key = ${entry.key}, value = ${entry.value.name}<br>
 
 </c:forEach>
-<form action="ДОБАВИТЬ В ТАБЛИЦУ ЗАКАЗЫ">
+<form action="cart">
 <input type="button" value="Оплатить">
+</form>
 </body>
 </html>
