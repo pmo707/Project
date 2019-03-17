@@ -15,6 +15,9 @@ public class UserDAO {
 
     public static final String SQL_FIND_USER_BY_LOGIN_AND_PASSWORD =
             SQL_FIND_ALL_USERS + " WHERE u.login=? && u.password=?";
+
+    public static final String SQL_FIND_USER_BY_LOGIN =
+            SQL_FIND_ALL_USERS + " WHERE u.login=?";
     private static UserDAO instance;
 
     public static synchronized UserDAO getInstance() {
@@ -28,7 +31,7 @@ public class UserDAO {
     }
 
 
-    public User findUser(Connection connection, String login, String password) {
+    public User findUserByLoginAndPassword(Connection connection, String login, String password) {
         User user = null;
         Connection con = connection;
         PreparedStatement pstmt = null;
@@ -52,6 +55,29 @@ public class UserDAO {
         return user;
     }
 
+    public User findUserByLogin(Connection connection, String login) {
+        User user = null;
+        Connection con = connection;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            pstmt = con.prepareStatement(SQL_FIND_USER_BY_LOGIN);
+            pstmt.setString(1, login);
+
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                user = extractUser(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBManager.close(rs);
+            DBManager.close(pstmt);
+        }
+
+        return user;
+    }
 
     public void editUserRoleByLogin(Connection con, String login, int role) {
         Connection connection = null;
@@ -81,7 +107,7 @@ public class UserDAO {
         User user = new User();
         user.setId(rs.getInt(DBConstants.USER_ID));
         user.setLogin(rs.getString(DBConstants.USER_LOGIN));
-        //user.setPassword(rs.getString(DBConstants.USER_PASSWORD));
+
         user.setRole(rs.getString(DBConstants.ROLE));
         return user;
     }

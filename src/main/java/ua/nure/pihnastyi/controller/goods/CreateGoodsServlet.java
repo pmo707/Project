@@ -46,11 +46,7 @@ public class CreateGoodsServlet extends HttpServlet {
         goods.setCategory(String.valueOf(category.getId()));
 
 
-        try {
-            GoodsService.getInstance().createGoods(goods);
-        } catch (DBException e) {
-            e.printStackTrace();
-        }
+        GoodsService.getInstance().createGoods(goods);
 
         String address = Paths.LIST_GOODS;
 

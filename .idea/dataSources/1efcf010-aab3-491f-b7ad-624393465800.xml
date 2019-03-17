@@ -1243,6 +1243,7 @@
       <RefSchemaName>task4db</RefSchemaName>
       <RefTableName>category</RefTableName>
       <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <column id="313" parent="290" name="id">
       <Position>1</Position>
@@ -1263,9 +1264,9 @@
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="316" parent="290" name="goods_id">
+    <column id="316" parent="290" name="created_at">
       <Position>4</Position>
-      <DataType>int(11)|0s</DataType>
+      <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
@@ -1287,12 +1288,14 @@
       <RefSchemaName>task4db</RefSchemaName>
       <RefTableName>user</RefTableName>
       <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <foreign-key id="321" parent="290" name="orders_ibfk_2">
       <ColNames>status_id</ColNames>
       <RefSchemaName>task4db</RefSchemaName>
       <RefTableName>statuses</RefTableName>
       <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <column id="322" parent="291" name="order_id">
       <Position>1</Position>

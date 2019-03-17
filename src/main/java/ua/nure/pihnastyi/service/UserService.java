@@ -1,19 +1,13 @@
 package ua.nure.pihnastyi.service;
 
 
-import ua.nure.pihnastyi.db.CategoryDAO;
 import ua.nure.pihnastyi.db.DBManager;
 import ua.nure.pihnastyi.db.RoleDAO;
 import ua.nure.pihnastyi.db.UserDAO;
-import ua.nure.pihnastyi.db.entity.Category;
-import ua.nure.pihnastyi.db.entity.Goods;
 import ua.nure.pihnastyi.db.entity.Role;
 import ua.nure.pihnastyi.db.entity.User;
-import ua.nure.pihnastyi.db.exeption.DBException;
 
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.List;
 
 public class UserService {
 
@@ -50,14 +44,25 @@ public class UserService {
         }
 
     }
+    public User getUsersByLogin(String login) {
 
+        Connection con = null;
+        UserDAO userDAO = new UserDAO();
+        try {
+            con = DBManager.getInstance().getConnection();
+            return userDAO.findUserByLogin(con, login);
+        } finally {
+            DBManager.close(con);
+        }
+
+    }
     public User getUsersByLoginAndPassword(String login, String password) {
 
         Connection con = null;
         UserDAO userDAO = new UserDAO();
         try {
             con = DBManager.getInstance().getConnection();
-            return userDAO.findUser(con, login, password);
+            return userDAO.findUserByLoginAndPassword(con, login, password);
         } finally {
             DBManager.close(con);
         }

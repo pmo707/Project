@@ -15,6 +15,21 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/css/main.css">
 </head>
 <body>
+<form action="listAllGoods">
+    <div>
+        <p>Сортировать:<br>
+            <select size="1" name="sortType">\
+                <option selected value="default" disabled>Sort by</option>
+                <option value="nameAZ">Name (az)</option>
+                <option value="nameZA">Name (za)</option>
+                <option value="priceLowToHigh">price(low-high)</option>
+                <option value="priceHighToLow">price (high-low)</option>
+                <option value="newToOld">new-old</option>
+                <option value="oldToNew">old-new</option>
+            </select><input type="submit" value="Сортировать"></p>
+    </div>
+</form>
+
 <form>
     <div class="centered">
         <table border="1" cellpadding="5">
@@ -26,7 +41,7 @@
                 <th>Цена</th>
                 <th>В корзину</th>
             </tr>
-            <c:forEach var="good" items="${applicationScope.goodsList}">
+            <c:forEach var="good" items="${goodsList}">
                 <tr>
                     <td>${good.name} </td>
 

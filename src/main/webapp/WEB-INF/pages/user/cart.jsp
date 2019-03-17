@@ -15,13 +15,42 @@
 <jsp:include page="../header.jsp"/>
 
 
+<table border="1" cellpadding="5">
+    <tr>
+        <th>Название</th>
+        <th>Цвет</th>
+        <th>Размер</th>
+        <th>Карегория</th>
+        <th>Цена</th>
+        <th>Удалить</th>
+    </tr>
+    <c:forEach items="${sessionScope.cartList}" var="entry">
 
-<c:forEach items="${sessionScope.cartList}" var="entry">
-    Key = ${entry.key}, value = ${entry.value.name}<br>
+        <tr>
+            <td>${entry.value.name} </td>
 
-</c:forEach>
-<form action="cart">
-<input type="button" value="Оплатить">
+            <td>${entry.value.color}</td>
+
+            <td> ${entry.value.size}</td>
+
+            <td>${entry.value.category}</td>
+
+            <td>${entry.value.price}</td>
+            <td><a href="deleteFromCart?id=${entry.value.id}">
+                Удалить
+            </a></td>
+        </tr>
+
+    </c:forEach>
+
+
+</table>
+
+<a></a>
+<form action="cart" method="post">
+    <button type="submit">Оплатить</button>
 </form>
+<a href="${pageContext.servletContext.contextPath}/listAllGoods">
+    Назад </a>
 </body>
 </html>

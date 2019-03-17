@@ -1,5 +1,6 @@
-package ua.nure.pihnastyi.controller;
+package ua.nure.pihnastyi.controller.cart;
 
+import ua.nure.pihnastyi.controller.Paths;
 import ua.nure.pihnastyi.db.entity.Cart;
 import ua.nure.pihnastyi.db.entity.Goods;
 
@@ -24,21 +25,16 @@ public class AddToCartServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String goodsId = req.getParameter("id");
         Goods goodsForAdd = GoodsService.getInstance().getGoodsById(goodsId);
-
         HttpSession session = req.getSession();
-
-        Map<String, Goods> m = (Map<String, Goods>) session.getAttribute("cartList");
-        if (m == null) {
-            m = new HashMap<>();
+        Map<String, Goods> cartList = (Map<String, Goods>) session.getAttribute("cartList");
+        if (cartList == null) {
+            cartList = new HashMap<>();
         }
-            m.put(goodsId, goodsForAdd);
-
-            session.setAttribute("cartList", m);
-            System.out.println(session.getAttribute("login"));
-
-            String address = Paths.LIST_CART;
+        cartList.put(goodsId, goodsForAdd);
+        session.setAttribute("cartList", cartList);
+        String address = Paths.LIST_CART;
 
 
-            resp.sendRedirect(getServletContext().getContextPath() + address);
-        }
+        resp.sendRedirect(getServletContext().getContextPath() + address);
     }
+}

@@ -4,9 +4,7 @@ package ua.nure.pihnastyi.service;
 import ua.nure.pihnastyi.db.DBManager;
 import ua.nure.pihnastyi.db.GoodsDAO;
 import ua.nure.pihnastyi.db.entity.Goods;
-import ua.nure.pihnastyi.db.entity.User;
-import ua.nure.pihnastyi.db.exeption.DBException;
-
+import ua.nure.pihnastyi.db.util.ServiceConstants;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -31,7 +29,7 @@ public class GoodsService {
 
     private GoodsDAO goodsDao;
 
-    public List<Goods> getAllGoods() throws DBException {
+    public List<Goods> getAllGoods() {
         List<Goods> goods = null;
         Connection con = null;
 
@@ -39,7 +37,7 @@ public class GoodsService {
             con = DBManager.getInstance().getConnection();
             goods = goodsDao.findAllGoods(con);
         } catch (SQLException ex) {
-            throw new DBException("Cannot obtain all goods", ex);
+
         } finally {
             DBManager.close(con);
         }
@@ -48,7 +46,7 @@ public class GoodsService {
     }
 
 
-    public void createGoods(Goods goods) throws DBException {
+    public void createGoods(Goods goods) {
 
         Connection con = null;
 
@@ -98,5 +96,44 @@ public class GoodsService {
         } finally {
             DBManager.close(con);
         }
+    }
+
+
+    public List<Goods> getAllGoodsSortByType(String sortType) {
+        List<Goods> goods = null;
+        Connection con = null;
+
+        con = DBManager.getInstance().getConnection();
+        try {
+            switch (sortType) {
+
+                case ServiceConstants.SORT_BY_NAME_AZ:
+                    goods = goodsDao.findAllGoodsByNameAZ(con);
+                    break;
+                case ServiceConstants.SORT_BY_NAME_ZA:
+                    goods = goodsDao.findAllGoodsByNameZA(con);
+                    break;
+                case ServiceConstants.SORT_BY_PRICE_LOW_TO_HIGH:
+                    goods = goodsDao.findAllGoodsByPriceLowToHigh(con);
+                    break;
+                case ServiceConstants.SORT_BY_PRICE_HIGH_TO_LOW:
+                    goods = goodsDao.findAllGoodsByPriceHighToLow(con);
+                    break;
+                case ServiceConstants.SORT_BY_DATE_NEW_TO_OLD:
+                    goods = goodsDao.findAllGoodsByDateNewToOld(con);
+                    break;
+                case ServiceConstants.SORT_BY_DATE_OLD_TO_NEW:
+                    goods = goodsDao.findAllGoodsByDateOldToNew(con);
+                    break;
+                default: goods = goodsDao.findAllGoodsByNameAZ(con);
+                    break;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBManager.close(con);
+        }
+
+        return goods;
     }
 }

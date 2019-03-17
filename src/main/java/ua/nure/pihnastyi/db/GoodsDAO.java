@@ -2,7 +2,6 @@ package ua.nure.pihnastyi.db;
 
 
 import ua.nure.pihnastyi.db.entity.Goods;
-import ua.nure.pihnastyi.db.exeption.DBException;
 import ua.nure.pihnastyi.db.util.DBConstants;
 
 import java.sql.*;
@@ -30,7 +29,7 @@ public class GoodsDAO {
     }
 
 
-    public List<Goods> findAllGoods(Connection con) throws SQLException, DBException {
+    public List<Goods> findAllGoods(Connection con) throws SQLException{
         List<Goods> goodsList = new ArrayList<>();
 
         Statement stmt = null;
@@ -49,8 +48,125 @@ public class GoodsDAO {
 
         return goodsList;
     }
+    public List<Goods> findAllGoodsByNameAZ(Connection con) throws SQLException {
+        List<Goods> goodsList = new ArrayList<>();
+
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(DBConstants.SQL_FIND_ALL_GOODS_BY_NAME_AZ);
+            while (rs.next()) {
+                goodsList.add(extractGoods(rs));
+            }
+        } finally {
+            DBManager.close(rs);
+            DBManager.close(stmt);
+        }
+
+        return goodsList;
+    }
+
+    public List<Goods> findAllGoodsByNameZA(Connection con) throws SQLException {
+        List<Goods> goodsList = new ArrayList<>();
+
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(DBConstants.SQL_FIND_ALL_GOODS_BY_NAME_ZA);
+            while (rs.next()) {
+                goodsList.add(extractGoods(rs));
+            }
+        } finally {
+            DBManager.close(rs);
+            DBManager.close(stmt);
+        }
+
+        return goodsList;
+    }
 
 
+    public List<Goods> findAllGoodsByPriceLowToHigh(Connection con) throws SQLException {
+        List<Goods> goodsList = new ArrayList<>();
+
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(DBConstants.SQL_FIND_ALL_GOODS_BY_PRICE_LOW_TO_HIGH);
+            while (rs.next()) {
+                goodsList.add(extractGoods(rs));
+            }
+        } finally {
+            DBManager.close(rs);
+            DBManager.close(stmt);
+        }
+
+        return goodsList;
+    }
+    public List<Goods> findAllGoodsByPriceHighToLow(Connection con) throws SQLException {
+        List<Goods> goodsList = new ArrayList<>();
+
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(DBConstants.SQL_FIND_ALL_GOODS_BY_PRICE_HIGH_TO_LOW);
+            while (rs.next()) {
+                goodsList.add(extractGoods(rs));
+            }
+        } finally {
+            DBManager.close(rs);
+            DBManager.close(stmt);
+        }
+
+        return goodsList;
+    }
+
+    public List<Goods> findAllGoodsByDateOldToNew(Connection con) throws SQLException {
+        List<Goods> goodsList = new ArrayList<>();
+
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(DBConstants.SQL_FIND_ALL_GOODS_BY_DATE_OLD_TO_NEW);
+            while (rs.next()) {
+                goodsList.add(extractGoods(rs));
+            }
+        } finally {
+            DBManager.close(rs);
+            DBManager.close(stmt);
+        }
+
+        return goodsList;
+    }
+
+    public List<Goods> findAllGoodsByDateNewToOld(Connection con) throws SQLException {
+        List<Goods> goodsList = new ArrayList<>();
+
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(DBConstants.SQL_FIND_ALL_GOODS_BY_DATE_NEW_TO_OLD);
+            while (rs.next()) {
+                goodsList.add(extractGoods(rs));
+            }
+        } finally {
+            DBManager.close(rs);
+            DBManager.close(stmt);
+        }
+
+        return goodsList;
+    }
     public void insertGoods(Connection con, Goods goods) {
         Connection connection = null;
         PreparedStatement pstmt = null;
@@ -169,6 +285,7 @@ public class GoodsDAO {
         goods.setCategory(rs.getString(DBConstants.GOODS_CATEGORY));
         return goods;
     }
+
 
 
 }

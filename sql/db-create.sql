@@ -41,17 +41,18 @@ CREATE TABLE goods
   available   INT                NOT NULL,
   category_id INT                NOT NULL,
   FOREIGN KEY (category_id) REFERENCES category (id)
+    ON DELETE CASCADE
 );
 
 
 CREATE TABLE orders
 (
-  id        INT      NOT NULL PRIMARY KEY auto_increment,
-  user_id   INT      NOT NULL,
-  status_id INT      NOT NULL,
-  goods_id INT       NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES user (id),
-  FOREIGN KEY (status_id) REFERENCES statuses (id)
+  id         INT      NOT NULL PRIMARY KEY auto_increment,
+  user_id    INT      NOT NULL,
+  status_id  INT      NOT NULL,
+  created_at DATETIME NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE,
+  FOREIGN KEY (status_id) REFERENCES statuses (id) ON DELETE CASCADE
 );
 
 CREATE TABLE orders_goods
@@ -115,24 +116,24 @@ VALUES (default, "Nissan", 1300.0, CURRENT_TIME, "black", 11, 12, 1);
 -- ---------------------
 -- INTO table orders
 INSERT INTO orders
-VALUES (default, 1, 2, 1);
-INSERT INTO orders
-VALUES (default, 2, 2, 2);
-INSERT INTO orders
-VALUES (default, 3, 1, 1);
-INSERT INTO orders
-VALUES (default, 4, 1, 1);
+VALUES (default, 1, 2, CURRENT_TIME);
+# INSERT INTO orders
+# VALUES (default, 2, 2, CURRENT_TIME);
+# INSERT INTO orders
+# VALUES (default, 3, 1, CURRENT_TIME);
+# INSERT INTO orders
+# VALUES (default, 4, 1, CURRENT_TIME);
 
 -- ---------------------
 -- INTO table orders_goods
-INSERT INTO orders_goods
-VALUES (1, 1);
-INSERT INTO orders_goods
-VALUES (1, 2);
-INSERT INTO orders_goods
-VALUES (1, 3);
-INSERT INTO orders_goods
-VALUES (1, 4);
+# INSERT INTO orders_goods
+# VALUES (1, 1);
+# INSERT INTO orders_goods
+# VALUES (1, 2);
+# INSERT INTO orders_goods
+# VALUES (1, 3);
+# INSERT INTO orders_goods
+# VALUES (1, 4);
 
 
 

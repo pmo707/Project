@@ -1,5 +1,6 @@
 package ua.nure.pihnastyi.controller;
 
+import org.apache.log4j.Logger;
 import ua.nure.pihnastyi.db.DBManager;
 import ua.nure.pihnastyi.db.UserDAO;
 import ua.nure.pihnastyi.db.entity.Role;
@@ -21,7 +22,7 @@ import java.sql.SQLException;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-
+    private static final Logger LOG = Logger.getLogger(LoginServlet.class);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
@@ -29,6 +30,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       String address = Paths.ERROR_LOGIN_PAGE_JSP;
+
         User user = null;
 
         String login = req.getParameter("login");
@@ -38,15 +40,18 @@ public class LoginServlet extends HttpServlet {
 
         if (user == null) {
             req.getRequestDispatcher(address).forward(req, resp);
+            LOG.info("Login wrong");
             return;
         }
 
         HttpSession session = req.getSession();
         String role = user.getRole();
 
+        LOG.info("Client role: " + role);
         session.setAttribute("user_id", user.getId());
         session.setAttribute("role", role);
         session.setAttribute("login", login);
+
         session.setMaxInactiveInterval(15 * 60);
         address = Paths.LIST_GOODS;
 

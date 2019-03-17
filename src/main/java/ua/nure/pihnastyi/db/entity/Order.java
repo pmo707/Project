@@ -1,33 +1,43 @@
 package ua.nure.pihnastyi.db.entity;
 
-import java.text.DateFormat;
+
+import java.util.Date;
 
 public class Order extends Module {
-    private User userId;
-    private Status statusId;
-    private DateFormat createdAt;
+    private long userId;
+    private long statusId;
+    private Date createdAt;
 
-    public User getUserId() {
-        return userId;
+    public Order() {
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
-    }
-
-    public Status getStatusId() {
-        return statusId;
-    }
-
-    public void setStatusId(Status statusId) {
+    public Order(long statusId) {
         this.statusId = statusId;
     }
 
-    public DateFormat getCreatedAt() {
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public long getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(long statusId) {
+        this.statusId = statusId;
+    }
+
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(DateFormat createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
+
+
 }

@@ -1,5 +1,7 @@
 package ua.nure.pihnastyi.controller;
 
+
+import org.apache.log4j.Logger;
 import ua.nure.pihnastyi.db.entity.User;
 import ua.nure.pihnastyi.service.UserService;
 
@@ -12,6 +14,8 @@ import java.io.IOException;
 
 @WebServlet("/setUserRoleByLogin")
 public class EditUserRoleServlet extends HttpServlet {
+    private static final Logger LOG = Logger.getLogger(EditUserRoleServlet.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         getServletContext().getRequestDispatcher("/WEB-INF/pages/admin/setUserRoleByLogin.jsp").forward(req, resp);
@@ -27,7 +31,7 @@ public class EditUserRoleServlet extends HttpServlet {
 
 
         UserService.getInstance().setUserRoleByLogin(login,role);
-
+        LOG.info("role changed");
         address = Paths.LIST_GOODS;
 
 

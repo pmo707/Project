@@ -41,7 +41,7 @@ public final class DBManager {
             ds = (DataSource) envContext.lookup("jdbc/task4db");
             LOG.trace("Data source ==> " + ds);
         } catch (NamingException ex) {
-            //LOG.error(Messages.ERR_CANNOT_OBTAIN_DATA_SOURCE, ex);
+            LOG.error("ERR_CANNOT_OBTAIN_DATA_SOURCE" + ex);
             //throw new DBException(Messages.ERR_CANNOT_OBTAIN_DATA_SOURCE, ex);
         }
     }
@@ -59,7 +59,6 @@ public final class DBManager {
         }
         return con;
     }
-
 
 
     public static void close(AutoCloseable quality) {
