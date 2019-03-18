@@ -26,7 +26,7 @@ public class OrderDAO {
     public OrderDAO() {
     }
 
-    public List<Order> findAllOrdersByLogin(Connection con, long userLoginId) throws SQLException{
+    public List<Order> findAllOrdersByLogin(Connection con, long userLoginId) throws SQLException {
         List<Order> orderList = new ArrayList<>();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -52,7 +52,7 @@ public class OrderDAO {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         long orderId = 0;
-        String generatedColumns[] = { "id" };
+        String generatedColumns[] = {"id"};
         int k = 1;
         connection = con;
         try {
@@ -64,7 +64,7 @@ public class OrderDAO {
             if (pstmt.executeUpdate() > 0) {
 
                 java.sql.ResultSet generatedKeys = pstmt.getGeneratedKeys();
-                if ( generatedKeys.next() ) {
+                if (generatedKeys.next()) {
                     orderId = generatedKeys.getInt(1);
                 }
             }
@@ -100,6 +100,30 @@ public class OrderDAO {
         }
     }
 
+    public void editStatusByOrderId(Connection con, String orderId, long orderStatusId) {
+        Connection connection = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        int k = 1;
+        connection = con;
+        try {
+            pstmt = connection.prepareStatement(DBConstants.SQL_EDIT_ORDER_STATUS_BY_ID,
+                    Statement.RETURN_GENERATED_KEYS);
+
+
+            pstmt.setLong(k++, orderStatusId);
+            pstmt.setLong(k++, 1);
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBManager.close(rs);
+            DBManager.close(pstmt);
+        }
+    }
+
     public static Order extractOrder(ResultSet rs) throws SQLException {
         Order order = new Order();
         order.setId(rs.getInt(DBConstants.ORDER_ID));
@@ -108,7 +132,6 @@ public class OrderDAO {
         order.setCreatedAt(rs.getDate("created_at"));
         return order;
     }
-
 
 
 }

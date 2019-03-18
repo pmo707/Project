@@ -1322,12 +1322,14 @@
       <RefSchemaName>task4db</RefSchemaName>
       <RefTableName>orders</RefTableName>
       <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <foreign-key id="327" parent="291" name="orders_goods_ibfk_1">
       <ColNames>goods_id</ColNames>
       <RefSchemaName>task4db</RefSchemaName>
       <RefTableName>goods</RefTableName>
       <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <column id="328" parent="292" name="id">
       <Position>1</Position>

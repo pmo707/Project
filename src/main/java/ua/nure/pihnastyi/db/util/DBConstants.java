@@ -85,6 +85,7 @@ public class DBConstants {
 
     public static final String STATUS_ID = "id";
     public static final String STATUS_NAME = "name";
+    public static final String SQL_FIND_STATUS_BY_ID = "SELECT * FROM statuses WHERE id=?";
     public static final String SQL_FIND_STATUS_BY_NAME = "SELECT * FROM statuses WHERE name=?";
     public static final String SQL_CREATE_ORDER = "INSERT INTO orders VALUES (DEFAULT, ?, ?, CURRENT_TIME)";
     public static final String SQL_ADD_GOODS_TO_ORDER = "INSERT INTO orders_goods VALUES (?, ?)";
@@ -92,10 +93,11 @@ public class DBConstants {
 
     public static final String SQL_FIND_ORDER_BY_LOGIN = "select * from orders where user_id=?";
 
-    //select * from orders inner join orders_goods on orders.id = orders_goods.order_id inner join goods on orders_goods.goods_id= goods.id";
     public static final String ORDER_ID = "id";
-    public static final String SQL_FIND_ALL_GOODS_BY_ORDER_ID = "select  g.id,g.name,g.price,g.createdAt," +
-            " g.color,g.size,g.available, name_category from goods g  inner join orders_goods on" +
-            " g.id= orders_goods.goods_id  inner join orders on orders.id = orders_goods.order_id" +
-            " inner join category on category.id = g.category_id where orders.id=?";
+    public static final String SQL_FIND_ALL_GOODS_BY_ORDER_ID = "select  g.id,g.name,g.price,g.createdAt, " +
+            "g.color,g.size,g.available, name_category, statuses.name from goods g  inner join orders_goods on " +
+            "g.id= orders_goods.goods_id  inner join orders on orders.id = orders_goods.order_id inner join " +
+            "category on category.id = g.category_id inner join statuses on statuses.id=orders.status_id where" +
+            " orders.id=?";
+    public static final String SQL_EDIT_ORDER_STATUS_BY_ID ="UPDATE orders set orders.status_id=?  WHERE orders.id =?" ;
 }

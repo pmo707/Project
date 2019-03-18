@@ -2,11 +2,9 @@ package ua.nure.pihnastyi.service;
 
 import ua.nure.pihnastyi.db.DBManager;
 import ua.nure.pihnastyi.db.OrderDAO;
+import ua.nure.pihnastyi.db.RoleDAO;
 import ua.nure.pihnastyi.db.UserDAO;
-import ua.nure.pihnastyi.db.entity.Goods;
-import ua.nure.pihnastyi.db.entity.Order;
-import ua.nure.pihnastyi.db.entity.Status;
-import ua.nure.pihnastyi.db.entity.User;
+import ua.nure.pihnastyi.db.entity.*;
 import ua.nure.pihnastyi.db.util.ServiceConstants;
 
 import java.sql.Connection;
@@ -74,5 +72,15 @@ public class OrderService {
         return orders;
     }
 
-
+    public void setStatusByOrderId(String orderId, String orderStatus) {
+        Connection con = null;
+        try {
+            con = DBManager.getInstance().getConnection();
+            Status status = StatusService.getInstance().getStatusByName(orderStatus);
+            long orderStatusId = status.getId();
+            orderDao.editStatusByOrderId(con, orderId, orderStatusId);
+        } finally {
+            DBManager.close(con);
+        }
+    }
 }

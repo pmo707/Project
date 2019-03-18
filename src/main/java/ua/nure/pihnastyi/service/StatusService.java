@@ -41,4 +41,17 @@ public class StatusService {
         return status;
     }
 
+
+    public Status getStatusById(long statusId) {
+        Connection con = null;
+        Status status = null;
+        try {
+            con = DBManager.getInstance().getConnection();
+
+            status = StatusDao.findStatusById(con,statusId);
+        } finally {
+            DBManager.close(con);
+        }
+        return status;
+    }
 }

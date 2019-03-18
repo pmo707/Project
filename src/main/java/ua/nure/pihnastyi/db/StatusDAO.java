@@ -25,6 +25,33 @@ public class StatusDAO {
     public StatusDAO() {
     }
 
+    public Status findStatusById(Connection con, long statusId) {
+
+        Status status = null;
+
+        Connection connection = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            connection = con;
+            pstmt = connection.prepareStatement(DBConstants.SQL_FIND_STATUS_BY_ID);
+            pstmt.setLong(1, statusId);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                status = extractStatus(rs);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+
+        } finally {
+            DBManager.close(rs);
+            DBManager.close(pstmt);
+
+        }
+        return status;
+    }
+
     public Status findStatusByName(Connection con, String statusName) {
 
         Status status = null;

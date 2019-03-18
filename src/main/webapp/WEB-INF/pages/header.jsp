@@ -24,6 +24,7 @@
                 <a href="${contextPath}/listAllGoods" class="active">Home page|</a>
                 <a href="${contextPath}/createGoods" class="active">Create goods|</a>
                 <a href="${contextPath}/setUserRoleByLogin" class="active">Ban / unban users|</a>
+                <a href="${contextPath}/setStatusByOrderId" class="active">Change status in order  |</a>
 
             </c:when>
             <c:when test="${sessionScope.role=='user'}">

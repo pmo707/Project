@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <jsp:include page="../header.jsp"/>
 <html>
 <head>
@@ -17,7 +18,9 @@
 
 <c:forEach var="order" items="${requestScope.ordersUser}">
 
-    <div><h2>Order№${order.key}</h2></div>
+    <div><h2>Order№${order.key.id}</h2></div>
+    <div><h2>Status:${order.key.statusName}</h2></div>
+    <div><h2>Cheated at: ${order.key.createdAt}</h2></div>
     <table border="1" cellpadding="5">
         <tr>
             <th>Название</th>
@@ -38,8 +41,14 @@
 
                 <td>${good.price}</td>
             </tr>
+            <c:set var="total" value="${total + good.price}"/>
         </c:forEach>
     </table>
+    <tr><h2>Total: ${total}</h2></tr>
+
+
+    <hr>
+    <c:set var="total" value="${total*0}"/>
 </c:forEach>
 
 </body>

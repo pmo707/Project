@@ -7,6 +7,7 @@ public class Order extends Module {
     private long userId;
     private long statusId;
     private Date createdAt;
+    private String statusName;
 
     public Order() {
     }
@@ -39,5 +40,11 @@ public class Order extends Module {
         this.createdAt = createdAt;
     }
 
+    public String getStatusName() {
+        return statusName;
+    }
 
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
+    }
 }

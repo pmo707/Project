@@ -59,8 +59,8 @@ CREATE TABLE orders_goods
 (
   order_id INT NOT NULL,
   goods_id INT NOT NULL,
-  FOREIGN KEY (goods_id) REFERENCES goods (id),
-  FOREIGN KEY (order_id) REFERENCES orders (id)
+  FOREIGN KEY (goods_id) REFERENCES goods (id)ON DELETE CASCADE,
+  FOREIGN KEY (order_id) REFERENCES orders (id)ON DELETE CASCADE
 );
 
 
