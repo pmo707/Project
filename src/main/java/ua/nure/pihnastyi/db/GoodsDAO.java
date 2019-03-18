@@ -15,7 +15,7 @@ public class GoodsDAO {
     private static final String SQL_CREATE_GOODS = "INSERT INTO goods VALUES (default, ?, ?, CURRENT_TIME,?, ?, ?, ?)";
     private static final String SQL_EDIT_GOODS = "UPDATE goods SET name= ?, price =?," +
             "createdAt=CURRENT_TIME,color =?, size =?,available = ?, category_id=? WHERE id = ?";
-//    private static final String SQL_FIND_GOODS_BY_ID = "SELECT * FROM goods WHERE id=?";
+    //    private static final String SQL_FIND_GOODS_BY_ID = "SELECT * FROM goods WHERE id=?";
     private static GoodsDAO instance;
 
     public static synchronized GoodsDAO getInstance() {
@@ -29,7 +29,7 @@ public class GoodsDAO {
     }
 
 
-    public List<Goods> findAllGoods(Connection con) throws SQLException{
+    public List<Goods> findAllGoods(Connection con) throws SQLException {
         List<Goods> goodsList = new ArrayList<>();
 
         Statement stmt = null;
@@ -48,6 +48,30 @@ public class GoodsDAO {
 
         return goodsList;
     }
+
+    public List<Goods> findAllGoodsByOrderId(Connection con, long orderId) throws SQLException {
+        List<Goods> goodsList = new ArrayList<>();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        int k = 1;
+        try {
+            pstmt = con.prepareStatement(DBConstants.SQL_FIND_ALL_GOODS_BY_ORDER_ID,
+                    Statement.RETURN_GENERATED_KEYS);
+            pstmt.setLong(k++, orderId);
+            rs= pstmt.executeQuery();
+            while (rs.next()) {
+                goodsList.add(extractGoods(rs));
+            }
+        } finally {
+            DBManager.close(rs);
+            DBManager.close(pstmt);
+        }
+
+        return goodsList;
+
+
+    }
+
     public List<Goods> findAllGoodsByNameAZ(Connection con) throws SQLException {
         List<Goods> goodsList = new ArrayList<>();
 
@@ -108,6 +132,7 @@ public class GoodsDAO {
 
         return goodsList;
     }
+
     public List<Goods> findAllGoodsByPriceHighToLow(Connection con) throws SQLException {
         List<Goods> goodsList = new ArrayList<>();
 
@@ -167,6 +192,7 @@ public class GoodsDAO {
 
         return goodsList;
     }
+
     public void insertGoods(Connection con, Goods goods) {
         Connection connection = null;
         PreparedStatement pstmt = null;
@@ -285,7 +311,6 @@ public class GoodsDAO {
         goods.setCategory(rs.getString(DBConstants.GOODS_CATEGORY));
         return goods;
     }
-
 
 
 }

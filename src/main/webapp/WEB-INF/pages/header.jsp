@@ -28,7 +28,7 @@
             </c:when>
             <c:when test="${sessionScope.role=='user'}">
                 <a href="${contextPath}/listAllGoods" class="homePage">Home page</a>
-                <a href="${contextPath}/listAllGoods" class="homePage">Previous orders</a>
+                <a href="${contextPath}/listOldOrders" class="homePage">Previous orders</a>
                 <form style="margin: 0; padding: 0; float: right;" action="${contextPath}/cart">
                     <button id="cartButton" type="submit">Cart</button>
                 </form>

@@ -115,8 +115,8 @@ VALUES (default, "Nissan", 1300.0, CURRENT_TIME, "black", 11, 12, 1);
 
 -- ---------------------
 -- INTO table orders
-INSERT INTO orders
-VALUES (default, 1, 2, CURRENT_TIME);
+# INSERT INTO orders
+# VALUES (default, 1, 2, CURRENT_TIME);
 # INSERT INTO orders
 # VALUES (default, 2, 2, CURRENT_TIME);
 # INSERT INTO orders

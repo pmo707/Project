@@ -26,26 +26,26 @@ public class OrderDAO {
     public OrderDAO() {
     }
 
-//    public List<Order> findOrderByLogin(Connection con, String userLogin) throws SQLException{
-//        List<Order> orderList = new ArrayList<>();
-//        PreparedStatement pstmt = null;
-//        ResultSet rs = null;
-//        Connection connection = con;
-//
-//        try {
-//            pstmt = connection.prepareStatement(DBConstants.SQL_FIND_GOODS_BY_ID);
-//            pstmt.setString(1, userLogin);
-//            rs = pstmt.executeQuery();
-//            while (rs.next()) {
-//                orderList.add(extractOrder(rs));
-//            }
-//        } finally {
-//            DBManager.close(rs);
-//            DBManager.close(pstmt);
-//        }
-//
-//        return orderList;
-//    }
+    public List<Order> findAllOrdersByLogin(Connection con, long userLoginId) throws SQLException{
+        List<Order> orderList = new ArrayList<>();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Connection connection = con;
+
+        try {
+            pstmt = connection.prepareStatement(DBConstants.SQL_FIND_ORDER_BY_LOGIN);
+            pstmt.setLong(1, userLoginId);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                orderList.add(extractOrder(rs));
+            }
+        } finally {
+            DBManager.close(rs);
+            DBManager.close(pstmt);
+        }
+
+        return orderList;
+    }
 
     public long insertOrder(Connection con, Order order) {
         Connection connection = null;
@@ -102,11 +102,13 @@ public class OrderDAO {
 
     public static Order extractOrder(ResultSet rs) throws SQLException {
         Order order = new Order();
-        order.setId(rs.getInt(DBConstants.ROLE_ID));
+        order.setId(rs.getInt(DBConstants.ORDER_ID));
         order.setUserId(rs.getLong("user_id"));
         order.setStatusId(rs.getLong("status_id"));
+        order.setCreatedAt(rs.getDate("created_at"));
         return order;
     }
+
 
 
 }

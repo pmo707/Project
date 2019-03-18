@@ -46,6 +46,23 @@ public class GoodsService {
     }
 
 
+    public List<Goods> getAllGoodsByOrderId(long orderId) {
+
+        List<Goods> goods = null;
+        Connection con = null;
+
+        try {
+            con = DBManager.getInstance().getConnection();
+            goods = goodsDao.findAllGoodsByOrderId(con,orderId);
+        } catch (SQLException ex) {
+
+        } finally {
+            DBManager.close(con);
+        }
+
+        return goods;
+    }
+
     public void createGoods(Goods goods) {
 
         Connection con = null;
@@ -136,4 +153,5 @@ public class GoodsService {
 
         return goods;
     }
+
 }

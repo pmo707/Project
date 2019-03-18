@@ -37,9 +37,8 @@ public class CartServlet extends HttpServlet {
         String userLogin = (String) session.getAttribute("login");
         Set<String> orderKeys = cartList.keySet();
         OrderService.getInstance().createOrder(userLogin,orderKeys);
-//        OrderService.getInstance().createGoodsToOrder(orderId,orderKeys);
         cartList.clear();
-        session.setAttribute("cartList", cartList);
+        req.setAttribute("cartList", cartList);
 
         String address = Paths.LIST_GOODS;
 

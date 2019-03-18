@@ -2,12 +2,16 @@ package ua.nure.pihnastyi.service;
 
 import ua.nure.pihnastyi.db.DBManager;
 import ua.nure.pihnastyi.db.OrderDAO;
+import ua.nure.pihnastyi.db.UserDAO;
+import ua.nure.pihnastyi.db.entity.Goods;
 import ua.nure.pihnastyi.db.entity.Order;
 import ua.nure.pihnastyi.db.entity.Status;
 import ua.nure.pihnastyi.db.entity.User;
 import ua.nure.pihnastyi.db.util.ServiceConstants;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Set;
 
 public class OrderService {
@@ -30,7 +34,7 @@ public class OrderService {
     private OrderDAO orderDao;
 
 
-    public void createOrder(String userLogin,Set<String> orderKeys) {
+    public void createOrder(String userLogin, Set<String> orderKeys) {
         Connection con = null;
         long orderId;
         try {
@@ -50,16 +54,25 @@ public class OrderService {
 
     }
 
- //   public void createGoodsToOrder(long orderId, ) {
-//        Connection con = null;
-//
-//        try {
-//            con = DBManager.getInstance().getConnection();
-//
-//
-//        } finally {
-//            DBManager.close(con);
-//        }
-//
-//    }
+    public List<Order> getAllOrderByLogin(String userLogin) {
+
+        List<Order> orders = null;
+        Connection con = null;
+        User user = null;
+
+        try {
+            con = DBManager.getInstance().getConnection();
+            user = UserDAO.getInstance().findUserByLogin(con, userLogin);
+            long userLoginId = user.getId();
+            orders = orderDao.findAllOrdersByLogin(con, userLoginId);
+        } catch (SQLException ex) {
+
+        } finally {
+            DBManager.close(con);
+        }
+
+        return orders;
+    }
+
+
 }
