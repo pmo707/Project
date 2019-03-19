@@ -117,14 +117,14 @@ public class GoodsService {
         }
     }
 
-    public List<Goods> getAllGoodsSortByRange(String varPrice1, String varPrice2) {
+    public List<Goods> getAllGoodsSortByRangePrice(String varPrice1, String varPrice2) {
 
         List<Goods> goods = new ArrayList<>();
         Connection con = null;
 
         con = DBManager.getInstance().getConnection();
         try {
-            goods = goodsDao.findAllGoodsByRange(con,varPrice1,varPrice2);
+            goods = goodsDao.findAllGoodsByRangePrice(con, varPrice1, varPrice2);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -134,6 +134,61 @@ public class GoodsService {
 
         return goods;
 
+    }
+    public List<Goods> getAllGoodsSortByRangeSize(String varSize1, String varSize2) {
+
+        List<Goods> goods = new ArrayList<>();
+        Connection con = null;
+
+        con = DBManager.getInstance().getConnection();
+        try {
+            goods = goodsDao.findAllGoodsByRangeSize(con, varSize1, varSize2);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBManager.close(con);
+        }
+
+        return goods;
+
+    }
+
+    public List<Goods> getAllGoodsSortByCategory(String varCategory) {
+        List<Goods> goods = new ArrayList<>();
+        Connection con = null;
+
+        con = DBManager.getInstance().getConnection();
+        try {
+            goods = goodsDao.findAllGoodsByCategory(con, varCategory);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBManager.close(con);
+        }
+
+        return goods;
+    }
+
+
+    public List<Goods> getAllGoodsSortByColor(String varColor) {
+        List<Goods> goods = new ArrayList<>();
+        Connection con = null;
+
+        con = DBManager.getInstance().getConnection();
+
+        try {
+            goods = goodsDao.findAllGoodsByColor(con, varColor);
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+
+        } finally {
+            DBManager.close(con);
+        }
+
+        return goods;
     }
 
     public List<Goods> getAllGoodsSortByType(String sortType) {

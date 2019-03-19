@@ -105,7 +105,7 @@ VALUES (default, "obama", "obamapass", 2);
 -- ---------------------
 -- INTO table goods
 INSERT INTO goods
-VALUES (default, "Audi", 100.0, CURRENT_TIME, "black", 11, 12, 1);
+VALUES (default, "Audi", 100.0, "2000-02-03", "black", 11, 12, 1);
 INSERT INTO goods
 VALUES (default, "BMW", 400.0, CURRENT_TIME, "black", 11, 12, 2);
 INSERT INTO goods

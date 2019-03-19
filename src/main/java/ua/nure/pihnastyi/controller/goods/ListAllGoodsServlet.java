@@ -10,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -22,12 +21,25 @@ public class ListAllGoodsServlet extends HttpServlet {
         String sortType =req.getParameter("sortType");
         String varPrice1 =req.getParameter("varPrice1");
         String varPrice2 =req.getParameter("varPrice2");
+        String varCategory =req.getParameter("varCategory");
+        String varColor =req.getParameter("varColor");
+        String varSize1 =req.getParameter("varSize1");
+        String varSize2 =req.getParameter("varSize2");
         goodsList = GoodsService.getInstance().getAllGoods();
         if(sortType!=null){
             goodsList=GoodsService.getInstance().getAllGoodsSortByType(sortType);
         }
         if(varPrice1!=null&&varPrice2!=null){
-            goodsList=GoodsService.getInstance().getAllGoodsSortByRange(varPrice1,varPrice2);
+            goodsList=GoodsService.getInstance().getAllGoodsSortByRangePrice(varPrice1,varPrice2);
+        }
+        if(varCategory!=null){
+            goodsList=GoodsService.getInstance().getAllGoodsSortByCategory(varCategory);
+        }
+        if(varColor!=null){
+            goodsList=GoodsService.getInstance().getAllGoodsSortByColor(varColor);
+        }
+        if(varSize1!=null&&varSize2!=null){
+            goodsList=GoodsService.getInstance().getAllGoodsSortByRangeSize(varSize1,varSize2);
         }
         req.getServletContext().setAttribute("goodsList", goodsList);
 

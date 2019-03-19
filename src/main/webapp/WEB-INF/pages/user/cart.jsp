@@ -10,47 +10,51 @@
 <html>
 <head>
     <title>Cart</title>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/css/goods.css"/>">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/css/body.css"/> ">
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
-
-
-<table border="1" cellpadding="5">
-    <tr>
-        <th>Название</th>
-        <th>Цвет</th>
-        <th>Размер</th>
-        <th>Карегория</th>
-        <th>Цена</th>
-        <th>Удалить</th>
-    </tr>
-    <c:forEach items="${sessionScope.cartList}" var="entry">
-
+<center>
+<div id="table">
+    <table border="1" cellpadding="5">
         <tr>
-            <td>${entry.value.name} </td>
-
-            <td>${entry.value.color}</td>
-
-            <td> ${entry.value.size}</td>
-
-            <td>${entry.value.category}</td>
-
-            <td>${entry.value.price}</td>
-            <td><a href="deleteFromCart?id=${entry.value.id}">
-                Удалить
-            </a></td>
+            <th>Название</th>
+            <th>Цвет</th>
+            <th>Размер</th>
+            <th>Карегория</th>
+            <th>Цена</th>
+            <th>Удалить</th>
         </tr>
+        <c:forEach items="${sessionScope.cartList}" var="entry">
 
-    </c:forEach>
+            <tr>
+                <td>${entry.value.name} </td>
+
+                <td>${entry.value.color}</td>
+
+                <td> ${entry.value.size}</td>
+
+                <td>${entry.value.category}</td>
+
+                <td>${entry.value.price}</td>
+                <td><a href="deleteFromCart?id=${entry.value.id}">
+                    Удалить
+                </a></td>
+            </tr>
+
+        </c:forEach>
 
 
-</table>
+    </table>
+</div>
 
 <a></a>
-<form action="cart" method="post">
+<form class="center" action="cart" method="post">
     <button type="submit">Оплатить</button>
 </form>
 <a href="${pageContext.servletContext.contextPath}/listAllGoods">
     Назад </a>
+</center>
 </body>
 </html>

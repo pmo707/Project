@@ -29,21 +29,23 @@ public class UserService {
 
     private UserDAO userDao;
 
-    public void setUserRoleByLogin(String login, String roleName) {
+    public boolean setUserRoleByLogin(String login, String roleName) {
         Connection con = null;
         UserDAO userDAO = new UserDAO();
         RoleDAO roleDAO = new RoleDAO();
         Role role = null;
+        boolean hasBaned;
         try {
             con = DBManager.getInstance().getConnection();
             role = roleDAO.findRoleByName(con, roleName);
             int roleId = (int) role.getId();
-            userDAO.editUserRoleByLogin(con, login, roleId);
+            hasBaned = userDAO.editUserRoleByLogin(con, login, roleId);
         } finally {
             DBManager.close(con);
         }
-
+        return hasBaned;
     }
+
     public User getUsersByLogin(String login) {
 
         Connection con = null;
@@ -56,6 +58,7 @@ public class UserService {
         }
 
     }
+
     public User getUsersByLoginAndPassword(String login, String password) {
 
         Connection con = null;

@@ -27,7 +27,7 @@ public class CreateGoodsServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         Goods goods = new Goods();
 
 
@@ -35,9 +35,14 @@ public class CreateGoodsServlet extends HttpServlet {
         String price = req.getParameter("price");
         String color = req.getParameter("color");
         String size = req.getParameter("size");
-        String available =req.getParameter("available");
+        String available = req.getParameter("available");
         String categoryName = req.getParameter("categoryName");
         Category category = CategoryService.getInstance().getCategoryByName(categoryName);
+        if (category == null) {
+            req.setAttribute("error", true);
+            req.getRequestDispatcher("/WEB-INF/pages/admin/createGoods.jsp").forward(req, resp);
+            return;
+        }
         goods.setName(goodsName);
         goods.setPrice(Long.parseLong(price));
         goods.setColor(color);
@@ -46,10 +51,9 @@ public class CreateGoodsServlet extends HttpServlet {
         goods.setCategory(String.valueOf(category.getId()));
 
 
-        GoodsService.getInstance().createGoods(goods);
+            GoodsService.getInstance().createGoods(goods);
 
         String address = Paths.LIST_GOODS;
-
 
 
         resp.sendRedirect(getServletContext().getContextPath() + address);

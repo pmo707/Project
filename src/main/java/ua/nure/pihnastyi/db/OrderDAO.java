@@ -113,7 +113,7 @@ public class OrderDAO {
 
 
             pstmt.setLong(k++, orderStatusId);
-            pstmt.setLong(k++, 1);
+            pstmt.setString(k++, orderId);
 
             pstmt.executeUpdate();
         } catch (SQLException e) {

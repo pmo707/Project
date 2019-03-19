@@ -23,22 +23,27 @@ public class EditUserRoleServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String address = Paths.ERROR_LOGIN_PAGE_JSP;
-        User user = null;
-
+        String address;
+        boolean hasChange;
         String login = req.getParameter("login");
         String role = req.getParameter("role");
 
+        hasChange = UserService.getInstance().setUserRoleByLogin(login, role);
+        if (!hasChange) {
+            req.setAttribute("error", true);
+            req.getRequestDispatcher("/WEB-INF/pages/admin/setUserRoleByLogin.jsp").forward(req, resp);
+            LOG.info("Login doesn't find");
+            return;
+        }
 
-        UserService.getInstance().setUserRoleByLogin(login,role);
+
         LOG.info("role changed");
         address = Paths.LIST_GOODS;
-
 
 
         resp.sendRedirect(getServletContext().getContextPath() + address);
 
 
     }
-    }
+}
 

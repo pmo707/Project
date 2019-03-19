@@ -12,36 +12,59 @@
 <html>
 <head>
     <title>List all goods</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/css/main.css">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/css/goods.css"/>">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/css/body.css"/> ">
 </head>
 <body>
-<form action="listAllGoods">
-    <div>
-        <p>Сортировать:<br>
-            <select size="1" name="sortType">\
-                <option selected value="default" disabled>Sort by</option>
-                <option value="nameAZ">Name (az)</option>
-                <option value="nameZA">Name (za)</option>
-                <option value="priceLowToHigh">price(low-high)</option>
-                <option value="priceHighToLow">price (high-low)</option>
-                <option value="newToOld">new-old</option>
-                <option value="oldToNew">old-new</option>
-            </select><input type="submit" value="Сортировать"></p>
 
-    </div>
+<form action="listAllGoods" class="maksym">
+
+    <p>Сортировать:<br>
+        <select size="1" name="sortType">\
+            <option selected value="default" disabled>Sort by</option>
+            <option value="nameAZ">Name (az)</option>
+            <option value="nameZA">Name (za)</option>
+            <option value="priceLowToHigh">price(low-high)</option>
+            <option value="priceHighToLow">price (high-low)</option>
+            <option value="newToOld">new-old</option>
+            <option value="oldToNew">old-new</option>
+        </select><input type="submit" value="Сортировать"></p>
+
 
 </form>
 <form action="listAllGoods">
     <div>
-        <p>Цена:<br>
-            <input type="text" name="varPrice1">
-            - <input type="text" name="varPrice2">
-            <input type="submit" value="Ok"></p>
+        Цена:<br>
+        <input type="number" min="0" name="varPrice1" placeholder="От"><br>
+        <input type="number" min="" name="varPrice2" placeholder="До">
+        <input type="submit" value="Ok">
+    </div>
+</form>
+<form action="listAllGoods">
+    <div>
+        Категория:<br>
+        <input type="text" name="varCategory">
+        <input type="submit" value="Ok">
+    </div>
+</form>
+<form action="listAllGoods">
+    <div>
+        Color:<br>
+        <input type="text" name="varColor">
+        <input type="submit" value="Ok">
+    </div>
+</form>
+<form action="listAllGoods">
+    <div>
+        Цена:<br>
+        <input type="number" min="0" name="varSize1" placeholder="От"><br>
+        <input type="number" min="" name="varSize2" placeholder="До">
+        <input type="submit" value="Ok">
     </div>
 </form>
 
 <form>
-    <div class="centered">
+    <div id="table">
         <table border="1" cellpadding="5">
             <tr>
                 <th>Название</th>

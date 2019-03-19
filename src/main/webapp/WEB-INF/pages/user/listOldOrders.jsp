@@ -12,44 +12,50 @@
 <html>
 <head>
     <title>My orders</title>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/css/goods.css"/>">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/css/body.css"/> ">
 </head>
 <body>
 <br>
-
 <c:forEach var="order" items="${requestScope.ordersUser}">
+<center>
+    <div>
+        <h2>Order№${order.key.id}|
+            Status:${order.key.statusName} |
+            Cheated at: ${order.key.createdAt}</h2>
+        <div id="table">
+            <table border="1" cellpadding="5">
+                <tr>
+                    <th>Название</th>
+                    <th>Цвет</th>
+                    <th>Размер</th>
+                    <th>Карегория</th>
+                    <th>Цена</th>
+                </tr>
+                <c:forEach items="${order.value}" var="good">
+                    <tr>
+                        <td>${good.name} </td>
 
-    <div><h2>Order№${order.key.id}</h2></div>
-    <div><h2>Status:${order.key.statusName}</h2></div>
-    <div><h2>Cheated at: ${order.key.createdAt}</h2></div>
-    <table border="1" cellpadding="5">
-        <tr>
-            <th>Название</th>
-            <th>Цвет</th>
-            <th>Размер</th>
-            <th>Карегория</th>
-            <th>Цена</th>
-        </tr>
-        <c:forEach items="${order.value}" var="good">
-            <tr>
-                <td>${good.name} </td>
+                        <td>${good.color}</td>
 
-                <td>${good.color}</td>
+                        <td> ${good.size}</td>
 
-                <td> ${good.size}</td>
+                        <td>${good.category}</td>
 
-                <td>${good.category}</td>
+                        <td>${good.price}</td>
+                    </tr>
+                    <c:set var="total" value="${total + good.price}"/>
+                </c:forEach>
+            </table>
+        </div>
+    </div>
 
-                <td>${good.price}</td>
-            </tr>
-            <c:set var="total" value="${total + good.price}"/>
-        </c:forEach>
-    </table>
     <tr><h2>Total: ${total}</h2></tr>
 
 
     <hr>
     <c:set var="total" value="${total*0}"/>
-</c:forEach>
-
+    </c:forEach>
+</center>
 </body>
 </html>

@@ -39,9 +39,11 @@ public class LoginServlet extends HttpServlet {
         user = UserService.getInstance().getUsersByLoginAndPassword(login, password);
 
         if (user == null) {
-            req.getRequestDispatcher(address).forward(req, resp);
+                req.setAttribute("error", true);
+                req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
             LOG.info("Login wrong");
             return;
+
         }
 
         HttpSession session = req.getSession();

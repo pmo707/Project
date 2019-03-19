@@ -79,11 +79,11 @@ public class UserDAO {
         return user;
     }
 
-    public void editUserRoleByLogin(Connection con, String login, int role) {
+    public boolean editUserRoleByLogin(Connection con, String login, int role) {
         Connection connection = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-
+        int count = 0;
         int k = 1;
         connection = con;
         try {
@@ -93,14 +93,14 @@ public class UserDAO {
             pstmt.setInt(k++, role);
             pstmt.setString(k++, login);
 
-            pstmt.executeUpdate();
+            count = pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             DBManager.close(rs);
             DBManager.close(pstmt);
         }
-
+        return count > 0;
     }
 
     private static User extractUser(ResultSet rs) throws SQLException {

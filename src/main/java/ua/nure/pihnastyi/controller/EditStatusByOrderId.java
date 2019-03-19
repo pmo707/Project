@@ -23,8 +23,8 @@ public class EditStatusByOrderId extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String address = Paths.ERROR_LOGIN_PAGE_JSP;
-        User user = null;
+        String address;
+
 
         String orderId = req.getParameter("orderId");
         String orderStatus = req.getParameter("orderStatus");
