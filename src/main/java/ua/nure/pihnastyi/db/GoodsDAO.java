@@ -193,6 +193,29 @@ public class GoodsDAO {
         return goodsList;
     }
 
+
+    public List<Goods> findAllGoodsByRange(Connection con,String varPrice1, String varPrice2) throws SQLException {
+
+        List<Goods> goodsList = new ArrayList<>();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        int k = 1;
+        try {
+            pstmt = con.prepareStatement(DBConstants.SQL_FIND_ALL_GOODS_BY_RANGE,
+                    Statement.RETURN_GENERATED_KEYS);
+            pstmt.setString(k++, varPrice1);
+            pstmt.setString(k++, varPrice2);
+            rs= pstmt.executeQuery();
+            while (rs.next()) {
+                goodsList.add(extractGoods(rs));
+            }
+        } finally {
+            DBManager.close(rs);
+            DBManager.close(pstmt);
+        }
+
+        return goodsList;
+    }
     public void insertGoods(Connection con, Goods goods) {
         Connection connection = null;
         PreparedStatement pstmt = null;
@@ -311,6 +334,7 @@ public class GoodsDAO {
         goods.setCategory(rs.getString(DBConstants.GOODS_CATEGORY));
         return goods;
     }
+
 
 
 }

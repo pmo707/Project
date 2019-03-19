@@ -5,8 +5,10 @@ import ua.nure.pihnastyi.db.DBManager;
 import ua.nure.pihnastyi.db.GoodsDAO;
 import ua.nure.pihnastyi.db.entity.Goods;
 import ua.nure.pihnastyi.db.util.ServiceConstants;
+
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GoodsService {
@@ -53,7 +55,7 @@ public class GoodsService {
 
         try {
             con = DBManager.getInstance().getConnection();
-            goods = goodsDao.findAllGoodsByOrderId(con,orderId);
+            goods = goodsDao.findAllGoodsByOrderId(con, orderId);
         } catch (SQLException ex) {
 
         } finally {
@@ -115,6 +117,24 @@ public class GoodsService {
         }
     }
 
+    public List<Goods> getAllGoodsSortByRange(String varPrice1, String varPrice2) {
+
+        List<Goods> goods = new ArrayList<>();
+        Connection con = null;
+
+        con = DBManager.getInstance().getConnection();
+        try {
+            goods = goodsDao.findAllGoodsByRange(con,varPrice1,varPrice2);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBManager.close(con);
+        }
+
+        return goods;
+
+    }
 
     public List<Goods> getAllGoodsSortByType(String sortType) {
         List<Goods> goods = null;
@@ -142,7 +162,8 @@ public class GoodsService {
                 case ServiceConstants.SORT_BY_DATE_OLD_TO_NEW:
                     goods = goodsDao.findAllGoodsByDateOldToNew(con);
                     break;
-                default: goods = goodsDao.findAllGoodsByNameAZ(con);
+                default:
+                    goods = goodsDao.findAllGoodsByNameAZ(con);
                     break;
             }
         } catch (SQLException e) {
@@ -153,5 +174,6 @@ public class GoodsService {
 
         return goods;
     }
+
 
 }

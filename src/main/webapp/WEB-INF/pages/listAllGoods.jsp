@@ -27,6 +27,16 @@
                 <option value="newToOld">new-old</option>
                 <option value="oldToNew">old-new</option>
             </select><input type="submit" value="Сортировать"></p>
+
+    </div>
+
+</form>
+<form action="listAllGoods">
+    <div>
+        <p>Цена:<br>
+            <input type="text" name="varPrice1">
+            - <input type="text" name="varPrice2">
+            <input type="submit" value="Ok"></p>
     </div>
 </form>
 

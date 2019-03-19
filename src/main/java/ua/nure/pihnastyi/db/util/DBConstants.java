@@ -99,5 +99,7 @@ public class DBConstants {
             "g.id= orders_goods.goods_id  inner join orders on orders.id = orders_goods.order_id inner join " +
             "category on category.id = g.category_id inner join statuses on statuses.id=orders.status_id where" +
             " orders.id=?";
-    public static final String SQL_EDIT_ORDER_STATUS_BY_ID ="UPDATE orders set orders.status_id=?  WHERE orders.id =?" ;
+    public static final String SQL_EDIT_ORDER_STATUS_BY_ID = "UPDATE orders set orders.status_id=?  WHERE orders.id =?";
+    public static final String SQL_FIND_ALL_GOODS_BY_RANGE = "SELECT * FROM goods inner join category on" +
+            " goods.category_id=category.id WHERE goods.price>=? and goods.price<=?\n";
 }
