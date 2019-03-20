@@ -8,9 +8,6 @@ import java.sql.*;
 
 public class CategoryDAO {
 
-
-
-
     private static CategoryDAO instance;
 
     public static synchronized CategoryDAO getInstance() {
@@ -45,7 +42,6 @@ public class CategoryDAO {
         } finally {
             DBManager.close(rs);
             DBManager.close(pstmt);
-
         }
         return category;
     }

@@ -17,12 +17,7 @@ import java.util.Properties;
 
 public final class DBManager {
 
-
     private static final Logger LOG = Logger.getLogger(DBManager.class);
-
-    // //////////////////////////////////////////////////////////
-    // singleton
-    // //////////////////////////////////////////////////////////
 
     private static DBManager instance;
 
@@ -37,12 +32,10 @@ public final class DBManager {
         try {
             Context initContext = new InitialContext();
             Context envContext = (Context) initContext.lookup("java:/comp/env");
-            // ST4DB - the name of data source
             ds = (DataSource) envContext.lookup("jdbc/task4db");
             LOG.trace("Data source ==> " + ds);
         } catch (NamingException ex) {
             LOG.error("ERR_CANNOT_OBTAIN_DATA_SOURCE" + ex);
-            //throw new DBException(Messages.ERR_CANNOT_OBTAIN_DATA_SOURCE, ex);
         }
     }
 
@@ -54,12 +47,10 @@ public final class DBManager {
         try {
             con = ds.getConnection();
         } catch (SQLException ex) {
-            //  LOG.error(Messages.ERR_CANNOT_OBTAIN_CONNECTION, ex);
-            // throw new DBException(Messages.ERR_CANNOT_OBTAIN_CONNECTION, ex);
+
         }
         return con;
     }
-
 
     public static void close(AutoCloseable quality) {
         try {

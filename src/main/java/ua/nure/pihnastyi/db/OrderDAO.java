@@ -60,7 +60,6 @@ public class OrderDAO {
                     generatedColumns);
             pstmt.setLong(k++, order.getUserId());
             pstmt.setLong(k++, order.getStatusId());
-            //orderId= pstmt.getGeneratedKeys().getInt(0);
             if (pstmt.executeUpdate() > 0) {
 
                 java.sql.ResultSet generatedKeys = pstmt.getGeneratedKeys();

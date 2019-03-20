@@ -18,7 +18,7 @@ public class EditUserRoleServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/WEB-INF/pages/admin/setUserRoleByLogin.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher(Paths.SET_USER_ROLE_PAGE).forward(req, resp);
     }
 
     @Override
@@ -31,19 +31,13 @@ public class EditUserRoleServlet extends HttpServlet {
         hasChange = UserService.getInstance().setUserRoleByLogin(login, role);
         if (!hasChange) {
             req.setAttribute("error", true);
-            req.getRequestDispatcher("/WEB-INF/pages/admin/setUserRoleByLogin.jsp").forward(req, resp);
+            req.getRequestDispatcher(Paths.SET_USER_ROLE_PAGE).forward(req, resp);
             LOG.info("Login doesn't find");
             return;
         }
-
-
         LOG.info("role changed");
         address = Paths.LIST_GOODS;
-
-
         resp.sendRedirect(getServletContext().getContextPath() + address);
-
-
     }
 }
 

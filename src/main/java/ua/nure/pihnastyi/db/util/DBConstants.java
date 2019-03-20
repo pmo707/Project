@@ -8,6 +8,16 @@ public class DBConstants {
     public static final String SQL_FIND_ALL_USERS = "SELECT * FROM user u" +
             " INNER JOIN roles r ON u.role_id = r.id";
 
+    public static final String SQL_FIND_USER_BY_LOGIN_AND_PASSWORD =
+            SQL_FIND_ALL_USERS + " WHERE u.login=? && u.password=?";
+
+    public static final String SQL_FIND_USER_BY_LOGIN =
+            SQL_FIND_ALL_USERS + " WHERE u.login=?";
+
+
+    public static final String SQL_CREATE_GOODS = "INSERT INTO goods VALUES (default, ?, ?, CURRENT_TIME,?, ?, ?, ?)";
+    public static final String SQL_EDIT_GOODS = "UPDATE goods SET name= ?, price =?," +
+            "createdAt=CURRENT_TIME,color =?, size =?,available = ?, category_id=? WHERE id = ?";
     public static final String SQL_FIND_ALL_GOODS = "SELECT * FROM goods g INNER JOIN category c ON g.category_id = c.id";
 
     public static final String SQL_FIND_GOODS_BY_ID = SQL_FIND_ALL_GOODS + " WHERE g.id=?";
@@ -36,7 +46,6 @@ public class DBConstants {
 
     public static final String SQL_DELETE_GOODS_BY_ID = "DELETE FROM goods WHERE id=?";
 
-    public static final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM user u INNER JOIN roles r ON u.role_id = r.id WHERE u.login=?";
 
     public static final String SQL_EDIT_USER_ROLE = "UPDATE roles\n" +
             "INNER JOIN user ON user.role_id = roles.id\n" +
@@ -46,20 +55,10 @@ public class DBConstants {
     public static final String SQL_FIND_ROLE_BY_NAME = "SELECT * FROM roles WHERE name=?";
 
 
-    public static final String SQL_FIND_USER_BY_LOGIN_AND_PASSWORD =
-            SQL_FIND_ALL_USERS + " WHERE u.login=? && u.password=?";
     public static final String SQL_INSERT_USER = "INSERT INTO user VALUES (DEFAULT, ?, ?, ?, ?)";
     public static final String SQL_UPDATE_GOODS = " UPDATE goods\n" +
             "SET name = 'Alfred Schmidt', price = 11,createdAt=CURRENT_TIME,color ='red', size =11,available = 11, category_id=1\n" +
             "WHERE id = 5";
-    public static final String SQL_DELETE_USER = " DELETE FROM user WHERE id=?";
-    public static final String SQL_SELECT_USER_GROUPS =
-            "SELECT g.name FROM user_group ug" +
-                    " INNER JOIN `group` g ON g.id=ug.group_id" +
-                    " WHERE ug.user_id=?";
-    public static final String SQL_CREATE_USER_GROUP = "INSERT INTO user_group VALUES(?, ?)";
-    public static final String SQL_GET_GROUP_ID_BY_NAME = "SELECT id FROM `group` WHERE name=?";
-    public static final String SQL_DELETE_USER_GROUP = "DELETE FROM user_group WHERE user_id=?";
 
 
     public static final String ROLE = "name";
@@ -102,10 +101,10 @@ public class DBConstants {
     public static final String SQL_EDIT_ORDER_STATUS_BY_ID = "UPDATE orders set orders.status_id=?  WHERE orders.id =?";
     public static final String SQL_FIND_ALL_GOODS_BY_RANGE_PRICE = "SELECT * FROM goods inner join category on" +
             " goods.category_id=category.id WHERE goods.price>=? and goods.price<=?";
-    public static final String SQL_FIND_ALL_GOODS_BY_CATEGORY ="SELECT * FROM goods inner join " +
-            "category on goods.category_id=category.id WHERE category.name_category=?" ;
+    public static final String SQL_FIND_ALL_GOODS_BY_CATEGORY = "SELECT * FROM goods inner join " +
+            "category on goods.category_id=category.id WHERE category.name_category=?";
     public static final String SQL_FIND_ALL_GOODS_BY_COLOR = "SELECT * FROM goods inner join " +
             "category on goods.category_id=category.id WHERE goods.color=?";
-    public static final String SQL_FIND_ALL_GOODS_BY_RANGE_SIZE ="SELECT * FROM goods inner join category on" +
-            " goods.category_id=category.id WHERE goods.size>=? and goods.size<=?" ;
+    public static final String SQL_FIND_ALL_GOODS_BY_RANGE_SIZE = "SELECT * FROM goods inner join category on" +
+            " goods.category_id=category.id WHERE goods.size>=? and goods.size<=?";
 }

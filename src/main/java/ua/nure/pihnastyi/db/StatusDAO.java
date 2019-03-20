@@ -2,15 +2,12 @@ package ua.nure.pihnastyi.db;
 
 import ua.nure.pihnastyi.db.entity.Status;
 import ua.nure.pihnastyi.db.util.DBConstants;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class StatusDAO {
-
-
 
 
     private static StatusDAO instance;

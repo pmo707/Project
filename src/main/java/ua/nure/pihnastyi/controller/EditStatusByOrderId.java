@@ -24,20 +24,11 @@ public class EditStatusByOrderId extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String address;
-
-
         String orderId = req.getParameter("orderId");
         String orderStatus = req.getParameter("orderStatus");
-
-
         OrderService.getInstance().setStatusByOrderId(orderId,orderStatus);
         LOG.info("order status changed");
         address = Paths.LIST_GOODS;
-
-
-
         resp.sendRedirect(getServletContext().getContextPath() + address);
-
-
     }
 }

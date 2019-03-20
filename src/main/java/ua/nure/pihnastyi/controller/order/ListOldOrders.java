@@ -1,5 +1,8 @@
 package ua.nure.pihnastyi.controller.order;
 
+import org.apache.log4j.Logger;
+import ua.nure.pihnastyi.controller.LoginServlet;
+import ua.nure.pihnastyi.controller.Paths;
 import ua.nure.pihnastyi.db.entity.Goods;
 import ua.nure.pihnastyi.db.entity.Order;
 import ua.nure.pihnastyi.db.entity.Status;
@@ -20,6 +23,7 @@ import java.util.Map;
 
 @WebServlet("/listOldOrders")
 public class ListOldOrders extends HttpServlet {
+    private static final Logger LOG = Logger.getLogger(ListOldOrders.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,12 +41,10 @@ public class ListOldOrders extends HttpServlet {
             goodsList = GoodsService.getInstance().getAllGoodsByOrderId(order.getId());
             ordersUser.put(order, goodsList);
         }
+        LOG.info("Get all old orders by login");
         req.setAttribute("ordersUser", ordersUser);
         req.setAttribute("ordersList", ordersList);
 
-
-//getServletContext()
-        req.getRequestDispatcher("/WEB-INF/pages/user/listOldOrders.jsp").forward(req, resp);
+        req.getRequestDispatcher(Paths.LIST_OLD_ORDERS).forward(req, resp);
     }
-
 }

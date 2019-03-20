@@ -1,8 +1,6 @@
 package ua.nure.pihnastyi.db.util;
 
 public class ServiceConstants {
-    public static final String USER_ID = "id";
-    public static final String USER_LOGIN = "login";
 
     public static final String SORT_BY_NAME_AZ = "nameAZ";
     public static final String SORT_BY_NAME_ZA = "nameZA";

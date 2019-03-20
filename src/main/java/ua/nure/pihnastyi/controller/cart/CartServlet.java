@@ -1,5 +1,7 @@
 package ua.nure.pihnastyi.controller.cart;
 
+import org.apache.log4j.Logger;
+import ua.nure.pihnastyi.controller.LoginServlet;
 import ua.nure.pihnastyi.controller.Paths;
 import ua.nure.pihnastyi.db.entity.Goods;
 import ua.nure.pihnastyi.db.entity.User;
@@ -22,6 +24,7 @@ import java.util.Set;
 
 @WebServlet("/cart")
 public class CartServlet extends HttpServlet {
+    private static final Logger LOG = Logger.getLogger(CartServlet.class);
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -32,16 +35,15 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-
         Map<String, Goods> cartList = (Map<String, Goods>) session.getAttribute("cartList");
+        LOG.info("get all goods in cart");
         String userLogin = (String) session.getAttribute("login");
         Set<String> orderKeys = cartList.keySet();
-        OrderService.getInstance().createOrder(userLogin,orderKeys);
+        OrderService.getInstance().createOrder(userLogin, orderKeys);
         cartList.clear();
+        LOG.info("cart is clean, order created");
         req.setAttribute("cartList", cartList);
-
         String address = Paths.LIST_GOODS;
-
         resp.sendRedirect(getServletContext().getContextPath() + address);
 
     }

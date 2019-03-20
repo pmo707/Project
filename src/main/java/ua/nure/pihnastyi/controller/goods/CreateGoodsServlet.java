@@ -1,10 +1,10 @@
 package ua.nure.pihnastyi.controller.goods;
 
 
+import org.apache.log4j.Logger;
 import ua.nure.pihnastyi.controller.Paths;
 import ua.nure.pihnastyi.db.entity.Category;
 import ua.nure.pihnastyi.db.entity.Goods;
-import ua.nure.pihnastyi.db.exeption.DBException;
 import ua.nure.pihnastyi.service.CategoryService;
 import ua.nure.pihnastyi.service.GoodsService;
 
@@ -17,20 +17,17 @@ import java.io.IOException;
 
 @WebServlet("/createGoods")
 public class CreateGoodsServlet extends HttpServlet {
+    private static final Logger LOG = Logger.getLogger(CreateGoodsServlet.class);
 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
         getServletContext().getRequestDispatcher("/WEB-INF/pages/admin/createGoods.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         Goods goods = new Goods();
-
-
         String goodsName = req.getParameter("goodsName");
         String price = req.getParameter("price");
         String color = req.getParameter("color");
@@ -40,7 +37,8 @@ public class CreateGoodsServlet extends HttpServlet {
         Category category = CategoryService.getInstance().getCategoryByName(categoryName);
         if (category == null) {
             req.setAttribute("error", true);
-            req.getRequestDispatcher("/WEB-INF/pages/admin/createGoods.jsp").forward(req, resp);
+            req.getRequestDispatcher(Paths.CREATE_GOODS_PAGE).forward(req, resp);
+            LOG.error("Doesn't find the category" + categoryName + "in db");
             return;
         }
         goods.setName(goodsName);
@@ -50,12 +48,9 @@ public class CreateGoodsServlet extends HttpServlet {
         goods.setAvailable(Long.parseLong(available));
         goods.setCategory(String.valueOf(category.getId()));
 
-
-            GoodsService.getInstance().createGoods(goods);
-
+        GoodsService.getInstance().createGoods(goods);
+        LOG.info("Goods was create");
         String address = Paths.LIST_GOODS;
-
-
         resp.sendRedirect(getServletContext().getContextPath() + address);
     }
 }

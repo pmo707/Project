@@ -1,6 +1,9 @@
 package ua.nure.pihnastyi.controller.cart;
 
+import org.apache.log4j.Logger;
 import ua.nure.pihnastyi.controller.Paths;
+import ua.nure.pihnastyi.controller.goods.CreateGoodsServlet;
+import ua.nure.pihnastyi.controller.goods.DeleteGoodsServlet;
 import ua.nure.pihnastyi.db.entity.Goods;
 import ua.nure.pihnastyi.service.GoodsService;
 
@@ -13,9 +16,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
 @WebServlet("/deleteFromCart")
 public class DeleteFromCartServlet extends HttpServlet {
 
+    private static final Logger LOG = Logger.getLogger(DeleteFromCartServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -24,8 +29,10 @@ public class DeleteFromCartServlet extends HttpServlet {
         Map<String, Goods> cartList = (Map<String, Goods>) session.getAttribute("cartList");
         if (cartList == null) {
             cartList = new HashMap<>();
+            LOG.info("cart is empty");
         }
         cartList.remove(goodsId);
+        LOG.info("delete goods with id:" + goodsId + " from cart");
         session.setAttribute("cartList", cartList);
         String address = Paths.LIST_CART;
         resp.sendRedirect(getServletContext().getContextPath() + address);

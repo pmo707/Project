@@ -1,8 +1,7 @@
 package ua.nure.pihnastyi.db;
 
-import ua.nure.pihnastyi.db.entity.Role;
+
 import ua.nure.pihnastyi.db.entity.User;
-import ua.nure.pihnastyi.db.exeption.DBException;
 import ua.nure.pihnastyi.db.util.DBConstants;
 
 import java.sql.*;
@@ -10,14 +9,6 @@ import java.sql.*;
 
 public class UserDAO {
 
-    public static final String SQL_FIND_ALL_USERS = "SELECT * FROM user u" +
-            " INNER JOIN roles r ON u.role_id = r.id";
-
-    public static final String SQL_FIND_USER_BY_LOGIN_AND_PASSWORD =
-            SQL_FIND_ALL_USERS + " WHERE u.login=? && u.password=?";
-
-    public static final String SQL_FIND_USER_BY_LOGIN =
-            SQL_FIND_ALL_USERS + " WHERE u.login=?";
     private static UserDAO instance;
 
     public static synchronized UserDAO getInstance() {
@@ -38,7 +29,7 @@ public class UserDAO {
         ResultSet rs = null;
 
         try {
-            pstmt = con.prepareStatement(SQL_FIND_USER_BY_LOGIN_AND_PASSWORD);
+            pstmt = con.prepareStatement(DBConstants.SQL_FIND_USER_BY_LOGIN_AND_PASSWORD);
             pstmt.setString(1, login);
             pstmt.setString(2, password);
             rs = pstmt.executeQuery();
@@ -62,7 +53,7 @@ public class UserDAO {
         ResultSet rs = null;
 
         try {
-            pstmt = con.prepareStatement(SQL_FIND_USER_BY_LOGIN);
+            pstmt = con.prepareStatement(DBConstants.SQL_FIND_USER_BY_LOGIN);
             pstmt.setString(1, login);
 
             rs = pstmt.executeQuery();
@@ -89,7 +80,6 @@ public class UserDAO {
         try {
             pstmt = connection.prepareStatement(DBConstants.SQL_EDIT_USER_ROLE,
                     Statement.RETURN_GENERATED_KEYS);
-
             pstmt.setInt(k++, role);
             pstmt.setString(k++, login);
 

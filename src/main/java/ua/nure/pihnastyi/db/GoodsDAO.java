@@ -12,10 +12,6 @@ import java.util.List;
 public class GoodsDAO {
 
 
-    private static final String SQL_CREATE_GOODS = "INSERT INTO goods VALUES (default, ?, ?, CURRENT_TIME,?, ?, ?, ?)";
-    private static final String SQL_EDIT_GOODS = "UPDATE goods SET name= ?, price =?," +
-            "createdAt=CURRENT_TIME,color =?, size =?,available = ?, category_id=? WHERE id = ?";
-    //    private static final String SQL_FIND_GOODS_BY_ID = "SELECT * FROM goods WHERE id=?";
     private static GoodsDAO instance;
 
     public static synchronized GoodsDAO getInstance() {
@@ -216,6 +212,7 @@ public class GoodsDAO {
 
         return goodsList;
     }
+
     public List<Goods> findAllGoodsByRangeSize(Connection con, String varSize1, String varSize2) throws SQLException {
 
         List<Goods> goodsList = new ArrayList<>();
@@ -291,7 +288,7 @@ public class GoodsDAO {
         int k = 1;
         connection = con;
         try {
-            pstmt = connection.prepareStatement(SQL_CREATE_GOODS,
+            pstmt = connection.prepareStatement(DBConstants.SQL_CREATE_GOODS,
                     Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(k++, goods.getName());
             pstmt.setLong(k++, goods.getPrice());
@@ -318,9 +315,8 @@ public class GoodsDAO {
         int k = 1;
         connection = con;
         try {
-            pstmt = connection.prepareStatement(SQL_EDIT_GOODS,
+            pstmt = connection.prepareStatement(DBConstants.SQL_EDIT_GOODS,
                     Statement.RETURN_GENERATED_KEYS);
-
             pstmt.setString(k++, goods.getName());
             pstmt.setLong(k++, goods.getPrice());
             pstmt.setString(k++, goods.getColor());
@@ -340,9 +336,7 @@ public class GoodsDAO {
 
 
     public Goods findGoodsById(Connection con, String goodsId) {
-
         Goods goods = null;
-
         Connection connection = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -371,7 +365,6 @@ public class GoodsDAO {
         Connection connection = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-
 
         try {
             connection = con;

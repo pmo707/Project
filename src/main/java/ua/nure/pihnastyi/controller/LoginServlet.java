@@ -25,11 +25,11 @@ public class LoginServlet extends HttpServlet {
     private static final Logger LOG = Logger.getLogger(LoginServlet.class);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
+        req.getRequestDispatcher(Paths.LOGIN_PAGE).forward(req, resp);
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-      String address = Paths.ERROR_LOGIN_PAGE_JSP;
+      String address;
 
         User user = null;
 
@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 
         if (user == null) {
                 req.setAttribute("error", true);
-                req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
+                req.getRequestDispatcher(Paths.LOGIN_PAGE).forward(req, resp);
             LOG.info("Login wrong");
             return;
 

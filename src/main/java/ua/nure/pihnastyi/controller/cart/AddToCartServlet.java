@@ -1,5 +1,7 @@
 package ua.nure.pihnastyi.controller.cart;
 
+import org.apache.log4j.Logger;
+import ua.nure.pihnastyi.controller.LoginServlet;
 import ua.nure.pihnastyi.controller.Paths;
 import ua.nure.pihnastyi.db.entity.Cart;
 import ua.nure.pihnastyi.db.entity.Goods;
@@ -19,7 +21,7 @@ import java.util.Map;
 
 @WebServlet("/addToCart")
 public class AddToCartServlet extends HttpServlet {
-
+    private static final Logger LOG = Logger.getLogger(AddToCartServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -29,6 +31,7 @@ public class AddToCartServlet extends HttpServlet {
         Map<String, Goods> cartList = (Map<String, Goods>) session.getAttribute("cartList");
         if (cartList == null) {
             cartList = new HashMap<>();
+            LOG.info("cart is empty. create a new cart");
         }
         cartList.put(goodsId, goodsForAdd);
         session.setAttribute("cartList", cartList);

@@ -56,7 +56,7 @@
 </form>
 <form action="listAllGoods">
     <div>
-        Цена:<br>
+        Размер:<br>
         <input type="number" min="0" name="varSize1" placeholder="От"><br>
         <input type="number" min="" name="varSize2" placeholder="До">
         <input type="submit" value="Ok">

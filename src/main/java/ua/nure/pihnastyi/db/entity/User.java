@@ -5,7 +5,9 @@ public class User extends Module {
     private String password;
     private String role;
 
-    public  User(){}
+    public User() {
+    }
+
     public User(String login) {
         this.login = login;
     }
@@ -26,7 +28,6 @@ public class User extends Module {
         this.password = password;
     }
 
-
     public String getRole() {
         return role;
     }
@@ -39,7 +40,7 @@ public class User extends Module {
     public String toString() {
         return "User{" +
                 "login='" + login + '\'' +
-                ", password='" + password + '\'' +
+                ", password= *******'"  + '\'' +
                 ", role='" + role + '\'' +
                 '}';
     }
