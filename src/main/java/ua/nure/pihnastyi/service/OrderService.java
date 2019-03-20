@@ -72,15 +72,17 @@ public class OrderService {
         return orders;
     }
 
-    public void setStatusByOrderId(String orderId, String orderStatus) {
+    public boolean setStatusByOrderId(String orderId, String orderStatus) {
         Connection con = null;
+        boolean hasBaned;
         try {
             con = DBManager.getInstance().getConnection();
             Status status = StatusService.getInstance().getStatusByName(orderStatus);
             long orderStatusId = status.getId();
-            orderDao.editStatusByOrderId(con, orderId, orderStatusId);
+            hasBaned =orderDao.editStatusByOrderId(con, orderId, orderStatusId);
         } finally {
             DBManager.close(con);
         }
+        return hasBaned;
     }
 }

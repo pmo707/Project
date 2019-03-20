@@ -27,6 +27,9 @@
         </select>
         <p><input type="submit" value="Ok"></p>
     </form>
+    <c:if test="${error}">
+        <span class="error">Doesn't find order/already has this status</span>
+    </c:if><br>
     <a href="${pageContext.servletContext.contextPath}/listAllGoods">
         Вернуться </a>
 </center>

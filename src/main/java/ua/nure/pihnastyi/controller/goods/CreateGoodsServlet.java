@@ -48,7 +48,13 @@ public class CreateGoodsServlet extends HttpServlet {
         goods.setAvailable(Long.parseLong(available));
         goods.setCategory(String.valueOf(category.getId()));
 
-        GoodsService.getInstance().createGoods(goods);
+        boolean hasCreated = GoodsService.getInstance().createGoods(goods);
+        if (!hasCreated) {
+            req.setAttribute("error", true);
+            req.getRequestDispatcher(Paths.CREATE_GOODS_PAGE).forward(req, resp);
+            LOG.error("Doesn't create goods" +goodsName );
+            return;
+        }
         LOG.info("Goods was create");
         String address = Paths.LIST_GOODS;
         resp.sendRedirect(getServletContext().getContextPath() + address);

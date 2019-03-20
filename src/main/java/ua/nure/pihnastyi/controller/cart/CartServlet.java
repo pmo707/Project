@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -28,7 +29,7 @@ public class CartServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        req.getRequestDispatcher("/WEB-INF/pages/user/cart.jsp").forward(req, resp);
+        req.getRequestDispatcher(Paths.CART_PAGE).forward(req, resp);
 
     }
 
@@ -36,6 +37,13 @@ public class CartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         Map<String, Goods> cartList = (Map<String, Goods>) session.getAttribute("cartList");
+
+        if(cartList==null){
+            req.setAttribute("error", true);
+            req.getRequestDispatcher(Paths.CART_PAGE).forward(req, resp);
+            LOG.info("cart is empty");
+            return;
+        }
         LOG.info("get all goods in cart");
         String userLogin = (String) session.getAttribute("login");
         Set<String> orderKeys = cartList.keySet();

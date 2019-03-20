@@ -99,10 +99,11 @@ public class OrderDAO {
         }
     }
 
-    public void editStatusByOrderId(Connection con, String orderId, long orderStatusId) {
+    public boolean editStatusByOrderId(Connection con, String orderId, long orderStatusId) {
         Connection connection = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
+        int count = 0;
 
         int k = 1;
         connection = con;
@@ -114,13 +115,14 @@ public class OrderDAO {
             pstmt.setLong(k++, orderStatusId);
             pstmt.setString(k++, orderId);
 
-            pstmt.executeUpdate();
+            count = pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             DBManager.close(rs);
             DBManager.close(pstmt);
         }
+        return count>0;
     }
 
     public static Order extractOrder(ResultSet rs) throws SQLException {

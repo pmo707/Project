@@ -1,6 +1,8 @@
 package ua.nure.pihnastyi.db;
 
 
+import org.apache.log4j.Logger;
+import ua.nure.pihnastyi.controller.LoginServlet;
 import ua.nure.pihnastyi.db.entity.Goods;
 import ua.nure.pihnastyi.db.util.DBConstants;
 
@@ -11,7 +13,7 @@ import java.util.List;
 
 public class GoodsDAO {
 
-
+    private static final Logger LOG = Logger.getLogger(GoodsDAO.class);
     private static GoodsDAO instance;
 
     public static synchronized GoodsDAO getInstance() {
@@ -280,11 +282,11 @@ public class GoodsDAO {
         return goodsList;
     }
 
-    public void insertGoods(Connection con, Goods goods) {
+    public boolean insertGoods(Connection con, Goods goods) {
         Connection connection = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-
+        int count = 0;
         int k = 1;
         connection = con;
         try {
@@ -296,14 +298,14 @@ public class GoodsDAO {
             pstmt.setLong(k++, goods.getSize());
             pstmt.setLong(k++, goods.getAvailable());
             pstmt.setString(k++, goods.getCategory());
-            pstmt.executeUpdate();
+            count=pstmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+           LOG.error("Goods already exists");
         } finally {
             DBManager.close(rs);
             DBManager.close(pstmt);
         }
-
+return count>0;
     }
 
     public void editGoods(Connection con, Goods goods) {

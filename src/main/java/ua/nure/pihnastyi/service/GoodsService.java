@@ -65,17 +65,18 @@ public class GoodsService {
         return goods;
     }
 
-    public void createGoods(Goods goods) {
+    public boolean createGoods(Goods goods) {
 
         Connection con = null;
+        boolean hasCreated;
 
         try {
             con = DBManager.getInstance().getConnection();
-            goodsDao.insertGoods(con, goods);
+            hasCreated = goodsDao.insertGoods(con, goods);
         } finally {
             DBManager.close(con);
         }
-
+        return hasCreated;
     }
 
 
@@ -135,6 +136,7 @@ public class GoodsService {
         return goods;
 
     }
+
     public List<Goods> getAllGoodsSortByRangeSize(String varSize1, String varSize2) {
 
         List<Goods> goods = new ArrayList<>();

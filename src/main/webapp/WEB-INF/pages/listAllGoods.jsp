@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<form action="listAllGoods" class="maksym">
+<form action="listAllGoods">
 
     <p>Сортировать:<br>
         <select size="1" name="sortType">\
@@ -36,7 +36,7 @@
     <div>
         Цена:<br>
         <input type="number" min="0" name="varPrice1" placeholder="От"><br>
-        <input type="number" min="" name="varPrice2" placeholder="До">
+        <input type="number" min="0" name="varPrice2" placeholder="До">
         <input type="submit" value="Ok">
     </div>
 </form>

@@ -13,4 +13,6 @@ public class Paths {
 	public static final String LIST_OLD_ORDERS = "/WEB-INF/pages/user/listOldOrders.jsp";
 	public static final String SET_USER_ROLE_PAGE = "/WEB-INF/pages/admin/setUserRoleByLogin.jsp";
 	public static final String LOGIN_PAGE = "/WEB-INF/pages/login.jsp";
+	public static final String SET_STATUS_ORDER = "/WEB-INF/pages/admin/setStatusByOrderId.jsp";
+	public static final String CART_PAGE = "/WEB-INF/pages/user/cart.jsp";
 }

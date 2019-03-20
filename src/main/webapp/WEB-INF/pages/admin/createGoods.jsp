@@ -13,7 +13,7 @@
 <center>
     <h1>Добавление новой позиции товара</h1> <br>
     <c:if test="${error}">
-        <span class="error">Invalid input category</span>
+        <span class="error">Invalid input category or goods already created</span>
     </c:if>
 
     <form action="${pageContext.servletContext.contextPath}/createGoods" method="POST">

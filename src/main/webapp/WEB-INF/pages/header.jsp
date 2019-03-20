@@ -20,7 +20,9 @@
     <form style="margin: 0; padding: 0; float: right;" action="${contextPath}/logout">
         <button id="logoutButton" type="submit">LogOut</button>
     </form>
+
     <div class="centered">
+
         <c:choose>
             <c:when test="${sessionScope.role=='admin'}">
                 <a href="${contextPath}/listAllGoods" class="active">Home page|</a>
@@ -36,7 +38,6 @@
                     <button id="cartButton" type="submit">Cart</button>
                 </form>
             </c:when>
-
             <c:when test="${sessionScope.role=='blocked user'}">
                 <a href="${contextPath}/listAllGoods" class="homePage">Home page</a>
                 <a href="${contextPath}/listOldOrders" class="homePage">Personal area</a>
@@ -44,7 +45,12 @@
             </c:when>
         </c:choose>
     </div>
-
+    <div style="margin: 0; padding: 0; float: right;">
+        <select id="sel_id" name="sel_name"  onchange="this.form.submit();">
+            <option value="ru">ru</option>
+            <option value="us">us </option>
+        </select>
+    </div>
 </div>
 <hr>
 

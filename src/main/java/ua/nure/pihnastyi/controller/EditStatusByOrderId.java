@@ -18,7 +18,7 @@ public class EditStatusByOrderId extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/WEB-INF/pages/admin/setStatusByOrderId.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher(Paths.SET_STATUS_ORDER).forward(req, resp);
     }
 
     @Override
@@ -26,7 +26,15 @@ public class EditStatusByOrderId extends HttpServlet {
         String address;
         String orderId = req.getParameter("orderId");
         String orderStatus = req.getParameter("orderStatus");
-        OrderService.getInstance().setStatusByOrderId(orderId,orderStatus);
+
+        boolean hasChange=OrderService.getInstance().setStatusByOrderId(orderId,orderStatus);
+
+        if (!hasChange) {
+            req.setAttribute("error", true);
+            req.getRequestDispatcher(Paths.SET_STATUS_ORDER).forward(req, resp);
+            LOG.info("Login doesn't find order");
+            return;
+        }
         LOG.info("order status changed");
         address = Paths.LIST_GOODS;
         resp.sendRedirect(getServletContext().getContextPath() + address);
