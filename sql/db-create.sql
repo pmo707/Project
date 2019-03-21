@@ -1,6 +1,6 @@
 DROP DATABASE IF EXISTS task4db;
 CREATE DATABASE task4db;
-
+ALTER DATABASE task4db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE task4db;
 
 
@@ -112,6 +112,8 @@ INSERT INTO goods
 VALUES (default, "Jeep", 300.0, CURRENT_TIME, "black", 11, 12, 3);
 INSERT INTO goods
 VALUES (default, "Nissan", 1300.0, CURRENT_TIME, "black", 11, 12, 1);
+INSERT INTO goods
+VALUES (default, "Тест", 1300.0, CURRENT_TIME, "черный", 11, 12, 1);
 
 -- ---------------------
 -- INTO table orders

@@ -7,11 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${param.lang}"/>
+<fmt:setBundle basename="resources"/>
 <jsp:include page="../header.jsp"/>
 <html>
 <head>
-    <title>My orders</title>
+    <title><fmt:message key="label.previous.orders" /></title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/goods.css"/>">
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/body.css"/> ">
 </head>
@@ -20,17 +22,17 @@
 <c:forEach var="order" items="${requestScope.ordersUser}">
 <center>
     <div>
-        <h2>Order№${order.key.id}|
-            Status:${order.key.statusName} |
-            Cheated at: ${order.key.createdAt}</h2>
+        <h2><fmt:message key="label.order.id" />${order.key.id}|
+            <fmt:message key="label.status" />:${order.key.statusName} |
+            <fmt:message key="label.cteatedAt" />: ${order.key.createdAt}</h2>
         <div id="table">
             <table border="1" cellpadding="5">
                 <tr>
-                    <th>Название</th>
-                    <th>Цвет</th>
-                    <th>Размер</th>
-                    <th>Карегория</th>
-                    <th>Цена</th>
+                    <th><fmt:message key="label.name" /></th>
+                    <th><fmt:message key="label.color" /></th>
+                    <th><fmt:message key="label.size" /></th>
+                    <th><fmt:message key="label.category" /></th>
+                    <th><fmt:message key="label.price" /></th>
                 </tr>
                 <c:forEach items="${order.value}" var="good">
                     <tr>
@@ -50,7 +52,7 @@
         </div>
     </div>
 
-    <tr><h2>Total: ${total}</h2></tr>
+    <tr><h2><fmt:message key="label.total" />: ${total}</h2></tr>
 
 
     <hr>

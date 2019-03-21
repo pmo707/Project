@@ -1,9 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${param.lang}"/>
+<jsp:include page="../header.jsp"/>
+<fmt:setBundle basename="resources"/>
 <html>
 <head>
-    <title>Create Goods</title>
+    <title><fmt:message key="label.create.goods" /></title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/goods.css"/>">
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/index.css"/>">
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/body.css"/> ">
@@ -11,55 +14,55 @@
 </head>
 <body>
 <center>
-    <h1>Добавление новой позиции товара</h1> <br>
+    <h1><fmt:message key="label.create.goods" /></h1> <br>
     <c:if test="${error}">
-        <span class="error">Invalid input category or goods already created</span>
+        <span class="error"><fmt:message key="create_goods_jsp.error" /></span>
     </c:if>
 
     <form action="${pageContext.servletContext.contextPath}/createGoods" method="POST">
         <div id="table">
             <table>
                 <tr>
-                    <td align="right"> Введите наименование :</td>
+                    <td align="right"> <fmt:message key="label.name" />:</td>
                     <td>
                         <input type="text" name="goodsName" value="test" required>
                     </td>
                 </tr>
                 <tr>
-                    <td align="right"> Введите категорию :</td>
+                    <td align="right"><fmt:message key="label.category" /> :</td>
                     <td>
                         <input type="text" name="categoryName" value="car" required>
                     </td>
                 </tr>
 
                 <tr>
-                    <td align="right"> Введите цену :</td>
+                    <td align="right"> <fmt:message key="label.price" />:</td>
                     <td>
                         <input type="number" min="0"  name="price" value="111" required>
                     </td>
 
                 </tr>
                 <tr>
-                    <td align="right"> Введите цвет :</td>
+                    <td align="right"><fmt:message key="label.color" />:</td>
                     <td>
                         <input type="text" name="color" value="test" required>
                     </td>
                 </tr>
                 <tr>
-                    <td align="right"> Введите размер :</td>
+                    <td align="right"> <fmt:message key="label.size" />:</td>
                     <td>
                         <input type="number" min="0"  name="size" value="123" required>
                     </td>
                 </tr>
                 <tr>
-                    <td align="right"> Введите доступное количество на складе :</td>
+                    <td align="right"> <fmt:message key="label.available" />:</td>
                     <td>
                         <input type="number" min="0"  name="available" value="111" required>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="submit" align="center" value="Добавить" required>
+                        <input type="submit" align="center" value="<fmt:message key="label.add" />" required>
                     </td>
                 </tr>
             </table>
@@ -67,7 +70,7 @@
     </form>
 
     <a href="${pageContext.servletContext.contextPath}/listAllGoods">
-        Вернуться </a>
+        <fmt:message key="label.back" /> </a>
 </center>
 </body>
 </html>

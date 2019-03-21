@@ -1,7 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${param.lang}"/>
 <fmt:setBundle basename="resources"/>
 <html>
 <head>
@@ -11,7 +12,15 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/body.css"/> ">
 </head>
 <body>
-
+<div style="margin: 20px; padding: 20px; float: right;">
+    <h4>
+        <fmt:message key="label.chooseRequestLocale" />
+    </h4>
+    <ul>
+        <li><a href="?lang=en"><fmt:message key="label.lang.en" /></a></li>
+        <li><a href="?lang=ru"><fmt:message key="label.lang.ru" /></a></li>
+    </ul>
+</div>
 <div class="main">
     <form action="login" method="post">
         <input type="text"  class="inputText" name="login" placeholder=<fmt:message key="login_jsp.login" /> required>
@@ -25,6 +34,8 @@
         <span class="error"><fmt:message key="login_jsp.Invalid.login.or.password"/> </span>
     </c:if>
 </center>
+
+
 
 </body>
 </html>

@@ -7,6 +7,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${param.lang}"/>
+<fmt:setBundle basename="resources"/>
 <html>
 <head>
     <title>Cart</title>
@@ -16,16 +19,17 @@
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
+
 <center>
     <div id="table">
         <table border="1" cellpadding="5">
             <tr>
-                <th>Название</th>
-                <th>Цвет</th>
-                <th>Размер</th>
-                <th>Карегория</th>
-                <th>Цена</th>
-                <th>Удалить</th>
+                <th><fmt:message key="label.name" /></th>
+                <th><fmt:message key="label.color" /></th>
+                <th><fmt:message key="label.size" /></th>
+                <th><fmt:message key="label.category" /></th>
+                <th><fmt:message key="label.price" /></th>
+                <th><fmt:message key="label.delete" /></th>
             </tr>
 
             <c:forEach items="${sessionScope.cartList}" var="entry">
@@ -41,7 +45,7 @@
 
                     <td>${entry.value.price}</td>
                     <td><a href="deleteFromCart?id=${entry.value.id}">
-                        Удалить
+                        <fmt:message key="label.delete" />
                     </a></td>
                 </tr>
 
@@ -53,14 +57,14 @@
 
     <a></a>
     <form class="center" action="cart" method="post">
-        <button type="submit">Оплатить</button>
+        <button type="submit"><fmt:message key="label.pay" /></button>
     </form>
     <br>
     <c:if test="${error}">
-        <span class="error">cart is empty</span>
+        <span class="error"><fmt:message key="cart_jsp.error" /></span>
     </c:if><br>
     <a href="${pageContext.servletContext.contextPath}/listAllGoods">
-        Назад </a>
+        <fmt:message key="label.back"/> </a>
 </center>
 </body>
 </html>

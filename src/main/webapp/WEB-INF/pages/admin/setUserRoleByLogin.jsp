@@ -7,8 +7,11 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${param.lang}"/>
+<fmt:setBundle basename="resources"/>
 <jsp:include page="../header.jsp"/>
-<html>
+<html lang="${param.lang}">
 <head>
     <title>Edit role</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/goods.css"/>">
@@ -17,23 +20,24 @@
 
 </head>
 <body>
+
 <center>
     <form action="setUserRoleByLogin" method="post">
-        <h1>Edit role</h1>
-        <p>user login:
+        <h1><fmt:message key="label.ban" />/<fmt:message key="label.unban" /></h1>
+        <p><fmt:message key="label.login" />:
             <input type="text" name="login" required></p>
 
         <select size="2" name="role">
-            <option value="blocked user">ban user</option>
-            <option selected value="user">unban user</option>
+            <option value="blocked user"><fmt:message key="label.ban" /></option>
+            <option selected value="user"><fmt:message key="label.unban" /></option>
         </select>
-        <p><input type="submit" value="Ok"></p>
+        <p><input type="submit" value="<fmt:message key="label.ok" />"></p>
     </form>
     <c:if test="${error}">
-        <span class="error">Doesn't find user/already banned/unbanned</span>
+        <span class="error"><fmt:message key="set_user_role_by_login_jsp.error" /></span>
     </c:if><br>
     <a href="${pageContext.servletContext.contextPath}/listAllGoods">
-        Вернуться </a>
+        <fmt:message key="label.back" /> </a>
 </center>
 </body>
 </html>
