@@ -2,7 +2,6 @@ package ua.nure.pihnastyi.db;
 
 
 import org.apache.log4j.Logger;
-import ua.nure.pihnastyi.controller.LoginServlet;
 import ua.nure.pihnastyi.db.entity.Goods;
 import ua.nure.pihnastyi.db.util.DBConstants;
 

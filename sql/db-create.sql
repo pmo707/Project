@@ -1,6 +1,6 @@
 DROP DATABASE IF EXISTS task4db;
 CREATE DATABASE task4db;
-ALTER DATABASE task4db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER DATABASE task4db CHARACTER SET = utf8mb4  COLLATE = utf8mb4_unicode_ci;
 USE task4db;
 
 
