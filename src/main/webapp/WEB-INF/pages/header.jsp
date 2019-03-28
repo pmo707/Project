@@ -43,6 +43,7 @@
                 <a href="${contextPath}/createGoods" class="active"><fmt:message key="label.create.goods" />|</a>
                 <a href="${contextPath}/setUserRoleByLogin" class="active"><fmt:message key="label.ban_or_unban user" />|</a>
                 <a href="${contextPath}/setStatusByOrderId" class="active"><fmt:message key="label.change.order.status" /> |</a>
+                <a href="${contextPath}/listAllOrders" class="active">List All orders |</a>
 
             </c:when>
             <c:when test="${sessionScope.role=='user'}">

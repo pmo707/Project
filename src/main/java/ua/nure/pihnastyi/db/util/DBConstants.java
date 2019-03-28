@@ -97,7 +97,7 @@ public class DBConstants {
             "g.color,g.size,g.available, name_category, statuses.name from goods g  inner join orders_goods on " +
             "g.id= orders_goods.goods_id  inner join orders on orders.id = orders_goods.order_id inner join " +
             "category on category.id = g.category_id inner join statuses on statuses.id=orders.status_id where" +
-            " orders.id=?";
+            " orders.id=? order by g.name";
     public static final String SQL_EDIT_ORDER_STATUS_BY_ID = "UPDATE orders set orders.status_id=?  WHERE orders.id =?";
     public static final String SQL_FIND_ALL_GOODS_BY_RANGE_PRICE = "SELECT * FROM goods inner join category on" +
             " goods.category_id=category.id WHERE goods.price>=? and goods.price<=?";
@@ -107,4 +107,9 @@ public class DBConstants {
             "category on goods.category_id=category.id WHERE goods.color=?";
     public static final String SQL_FIND_ALL_GOODS_BY_RANGE_SIZE = "SELECT * FROM goods inner join category on" +
             " goods.category_id=category.id WHERE goods.size>=? and goods.size<=?";
+
+
+
+    public static final String SQL_FIND_ALL_ORDER = "select * from orders order by orders.status_id";
+
 }

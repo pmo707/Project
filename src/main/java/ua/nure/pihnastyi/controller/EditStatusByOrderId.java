@@ -1,9 +1,7 @@
 package ua.nure.pihnastyi.controller;
 
 import org.apache.log4j.Logger;
-import ua.nure.pihnastyi.db.entity.User;
 import ua.nure.pihnastyi.service.OrderService;
-import ua.nure.pihnastyi.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +25,7 @@ public class EditStatusByOrderId extends HttpServlet {
         String orderId = req.getParameter("orderId");
         String orderStatus = req.getParameter("orderStatus");
 
-        boolean hasChange=OrderService.getInstance().setStatusByOrderId(orderId,orderStatus);
+        boolean hasChange = OrderService.getInstance().setStatusByOrderId(orderId, orderStatus);
 
         if (!hasChange) {
             req.setAttribute("error", true);

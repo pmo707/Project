@@ -11,6 +11,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ua.nure.pihnastyi.db.GoodsDAO.extractGoods;
+
 public class OrderDAO {
 
 
@@ -45,6 +47,30 @@ public class OrderDAO {
         }
 
         return orderList;
+    }
+
+
+    public List<Order> findAllOrders(Connection con) {
+
+        List<Order> ordersList = new ArrayList<>();
+
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(DBConstants.SQL_FIND_ALL_ORDER);
+            while (rs.next()) {
+                ordersList.add(extractOrder(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBManager.close(rs);
+            DBManager.close(stmt);
+        }
+
+        return ordersList;
     }
 
     public long insertOrder(Connection con, Order order) {
@@ -133,6 +159,7 @@ public class OrderDAO {
         order.setCreatedAt(rs.getDate("created_at"));
         return order;
     }
+
 
 
 }

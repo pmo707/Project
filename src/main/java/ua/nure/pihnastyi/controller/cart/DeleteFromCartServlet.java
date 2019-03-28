@@ -2,11 +2,7 @@ package ua.nure.pihnastyi.controller.cart;
 
 import org.apache.log4j.Logger;
 import ua.nure.pihnastyi.controller.Paths;
-import ua.nure.pihnastyi.controller.goods.CreateGoodsServlet;
-import ua.nure.pihnastyi.controller.goods.DeleteGoodsServlet;
 import ua.nure.pihnastyi.db.entity.Goods;
-import ua.nure.pihnastyi.service.GoodsService;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

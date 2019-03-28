@@ -2,7 +2,6 @@ package ua.nure.pihnastyi.controller;
 
 
 import org.apache.log4j.Logger;
-import ua.nure.pihnastyi.db.entity.User;
 import ua.nure.pihnastyi.service.UserService;
 
 import javax.servlet.ServletException;

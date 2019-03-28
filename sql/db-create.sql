@@ -116,7 +116,7 @@ INSERT INTO goods
 VALUES (default, "Тест", 1300.0, CURRENT_TIME, "черный", 11, 12, 1);
 
 -- ---------------------
--- INTO table orders
+# INTO table orders
 # INSERT INTO orders
 # VALUES (default, 1, 2, CURRENT_TIME);
 # INSERT INTO orders

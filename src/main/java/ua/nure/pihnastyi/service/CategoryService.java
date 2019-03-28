@@ -3,7 +3,6 @@ package ua.nure.pihnastyi.service;
 import ua.nure.pihnastyi.db.CategoryDAO;
 import ua.nure.pihnastyi.db.DBManager;
 import ua.nure.pihnastyi.db.entity.Category;
-import ua.nure.pihnastyi.db.entity.Goods;
 
 import java.sql.Connection;
 

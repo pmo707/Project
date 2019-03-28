@@ -14,7 +14,7 @@
 <jsp:include page="header.jsp"/>
 <html>
 <head>
-    <title>List all goods<fmt:message key="label.List.all.goods" /></title>
+    <title><fmt:message key="label.List.all.goods" /></title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/goods.css"/>">
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/body.css"/> ">
 </head>

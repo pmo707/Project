@@ -52,7 +52,7 @@ public class CreateGoodsServlet extends HttpServlet {
         if (!hasCreated) {
             req.setAttribute("error", true);
             req.getRequestDispatcher(Paths.CREATE_GOODS_PAGE).forward(req, resp);
-            LOG.error("Doesn't create goods" +goodsName );
+            LOG.error("Doesn't create goods" + goodsName);
             return;
         }
         LOG.info("Goods was create");

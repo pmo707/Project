@@ -2,7 +2,6 @@ package ua.nure.pihnastyi.service;
 
 import ua.nure.pihnastyi.db.DBManager;
 import ua.nure.pihnastyi.db.OrderDAO;
-import ua.nure.pihnastyi.db.RoleDAO;
 import ua.nure.pihnastyi.db.UserDAO;
 import ua.nure.pihnastyi.db.entity.*;
 import ua.nure.pihnastyi.db.util.ServiceConstants;
@@ -84,5 +83,20 @@ public class OrderService {
             DBManager.close(con);
         }
         return hasBaned;
+    }
+
+    public List<Order> getAllOrder() {
+        List<Order> orders = null;
+        Connection con = null;
+        User user = null;
+
+        try {
+            con = DBManager.getInstance().getConnection();
+            orders = orderDao.findAllOrders(con);
+        } finally {
+            DBManager.close(con);
+        }
+
+        return orders;
     }
 }
